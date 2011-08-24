@@ -1,0 +1,19 @@
+# source this file to use the ports libraries
+
+basedir=/usr/local/mysql
+bindir=$basedir/bin
+mandir=$basedir/man
+
+case ":$PATH:" in
+*:$bindir:*) ;; # already in
+*)
+    export PATH=$bindir:$PATH
+    ;;
+esac
+
+case ":$MANPATH:" in
+*:$mandir:*) ;; # already in
+*)
+    export MANPATH=$mandir:$MANPATH
+    ;;
+esac

@@ -1,0 +1,13 @@
+#!bash
+if ! type -p git &>/dev/null; then
+    PATH=$PATH:/usr/local/git/bin
+fi
+if type -p git &>/dev/null; then
+    GIT_COMPLETION_FILE=/usr/local/git/contrib/completion/git-completion.bash
+    if test -f $GIT_COMPLETION_FILE; then
+        source $GIT_COMPLETION_FILE
+    fi
+    unset GIT_COMPLETION_FILE
+else
+    echo "'git' not on path, not sourcing completion"
+fi

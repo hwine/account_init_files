@@ -1,0 +1,30 @@
+[ui]
+username = Hal Wine <hal.wine@gmail.com>
+
+[extensions]
+;imerge=
+bookmarks=
+hgk=
+;hgk=/Users/hwine/Library/Python/2.5/site-packages/mercurial-0.9.5-py2.5-macosx-10.3-fat.egg/hgext/hgk.py
+#hgext.convert=
+hgext.graphlog=
+graphviz = /Users/hwine/tmp/hg/playpen/graphviz.py
+hgext.mq=
+hggit = 
+
+[bookmarks]
+track.current = True
+
+[diff]
+git = True
+
+[email]
+method = smtp
+
+[smtp]
+host = smtp.sonic.net
+
+[web]
+style = gitweb
+
+patchbomb =

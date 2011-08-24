@@ -1,0 +1,9 @@
+# File that sources socket setting, if it exists, established on login
+
+# make it easier for ssh agent forwarding & screen use
+sockFile="/users/$LOGNAME/.ssh/sockets/$(hostname -s).current"
+if [ -r $sockFile ] ; then
+    source $sockFile
+else
+    echo 1>&2 "No socket info found"
+fi

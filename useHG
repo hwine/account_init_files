@@ -1,0 +1,5 @@
+# source bash completion
+
+if [ -r ~/tools/Mercurial/hgtab/hgtab-bash.sh ]; then
+    source ~/tools/Mercurial/hgtab/hgtab-bash.sh
+fi
