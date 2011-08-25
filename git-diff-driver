@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Wrapper to use Mac's diff tool
+exec /usr/bin/opendiff "$2" "$5" -merge "$5"

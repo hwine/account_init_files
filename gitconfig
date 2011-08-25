@@ -3,8 +3,8 @@
 	email = hal.wine@gmail.com
 
 [diff]
-    external = "/Users/hwine/bin/git-diff-driver"
+    external = "$HOME/bin/git-diff-driver"
 [gui]
 	recentrepo = /Users/hwine/tmp/trac-git/sys_trac_hg/trac_hacks/gitplugin
 [core]
-	excludesfile = /Users/hwine/.gitignore
+	excludesfile = $HOME/.gitignore
