@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# run a screen based on the host name - useful with multiple logins
+# where home directory is shared.
+
+exec screen -DR `hostname -s` "$@"
