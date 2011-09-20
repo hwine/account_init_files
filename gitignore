@@ -1,3 +1,4 @@
 # Settings for my machine (glob format)
-*.swp
+.*.swp
 *.py[oc]
+*.orig
