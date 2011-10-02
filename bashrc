@@ -3,8 +3,6 @@ set -o vi
 alias ll=ls\ -lF
 alias ls=ls\ -F
 
-[ -d ~/bin ] && PATH=~/bin:$PATH
-
 [ -r ~/bin/rprompt ] && PROMPT_COMMAND='source ~/bin/rprompt'
 
 if [ -r ~/bin/virtualenvwrapper.sh ] ; then

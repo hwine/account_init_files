@@ -3,12 +3,12 @@
 
 export HISTCONTROL=ignoreboth
 
-# add X11 paths if xterm
-case $TERM in
-xterm)
-    PATH=$PATH:/usr/X11R6/bin
-    ;;
-esac
+## add X11 paths if xterm
+#case $TERM in
+#xterm)
+#    PATH=$PATH:/usr/X11R6/bin
+#    ;;
+#esac
 
 export PATH
 
@@ -25,9 +25,18 @@ test -n "$DISPLAY" && TERM=xterm-color || :
 # for now (2008-08-03)
 TERM=xterm
 
+if test -d $HOME/bin ; then
+    case ":$PATH:" in
+    *:$HOME/bin:*) ;; # already in
+    *) export PATH=$HOME/bin:$PATH ;;
+    esac
+fi
 # In case machine has macports installed
 # note that macports _does_ need to go first, or inconsistencies arise
 if test -d /opt/local/bin ; then
-    export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+    case ":$PATH:" in
+    *:/opt/local/bin:*) ;; # already in
+    *) export PATH=/opt/local/bin:/opt/local/sbin:$PATH ;;
+    esac
 fi
 

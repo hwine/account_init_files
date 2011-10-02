@@ -10,7 +10,9 @@ hgk=
 hgext.graphlog=
 ;graphviz = /Users/hwine/tmp/hg/playpen/graphviz.py
 hgext.mq=
-;hggit = 
+hgext.bookmarks =
+hggit = 
+#hgext.purge=
 
 [bookmarks]
 track.current = True
