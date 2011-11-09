@@ -6,6 +6,12 @@
 [gui]
 	recentrepo = /Users/hwine/tmp/trac-git/sys_trac_hg/trac_hacks/gitplugin
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/hal/.gitignore_global
 [color]
 	ui = auto
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Volumes/SourceTree/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
