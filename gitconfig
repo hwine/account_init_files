@@ -1,12 +1,17 @@
 [user]
 	name = Hal Wine
-	email = hal.wine@gmail.com
-
+	email = hwine@mozilla.com
+[core]
+	excludesfile = /Users/Hal/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
 [diff]
 [gui]
 	recentrepo = /Users/hwine/tmp/trac-git/sys_trac_hg/trac_hacks/gitplugin
-[core]
-	excludesfile = /Users/hal/.gitignore_global
 [color]
 	ui = auto
 [difftool "sourcetree"]
