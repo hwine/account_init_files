@@ -96,7 +96,7 @@ set modelines=3
 set hlsearch
 set nocompatible
 set smartindent
-set spell
+set nospell
 set statusline=%f%m%r%h%w\ [%{&ff}]\ %y%=[\%03.3b/\%02.2B]\ (%v,%l/%L)[%p%%]
 :command! Rst :!rst2html.py "%" > /tmp/rstprev.html && open /tmp/rstprev.html
 :nnoremap <C-p><C-r> :Rst<CR>

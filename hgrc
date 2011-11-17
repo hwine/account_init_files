@@ -34,6 +34,7 @@ track.current = True
 
 [diff]
 git = True
+showfunc = True
 
 [email]
 method = smtp
