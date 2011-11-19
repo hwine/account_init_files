@@ -5,6 +5,7 @@ help:
 	@echo "Manage config files"
 	@echo "  help - this message"
 	@echo "  install - create symlinks for common files"
+	@echo "  pydist - toggle local user install of python packages"
 
 # normal install consists of both scripts and rc files
 install: bin_files dot_files
@@ -53,4 +54,14 @@ bin_files: $(BIN_FILES)
 		echo "ln -s $(PWD)/$$f" ~/bin/$$f; \
 	    fi; \
 	done 
+
+# toggle ability to install into ~/Library
+pydist:
+	@if test -h ~/.pydistutils.cfg ; then \
+	    unlink ~/.pydistutils.cfg ; \
+	    echo "local package install disabled" ; \
+	else \
+	    ln -s $(PWD)/pydistutils.cfg ~/.pydistutils.cfg; \
+	    echo "local package install enabled" ; \
+	fi
 
