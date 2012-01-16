@@ -6,9 +6,11 @@ help:
 	@echo "  help - this message"
 	@echo "  install - create symlinks for common files"
 	@echo "  pydist - toggle local user install of python packages"
+	@echo "  status	- report on state of installation"
 
 # normal install consists of both scripts and rc files
 install: bin_files dot_files
+	@echo "# REMEMBER TO EXECUTE THE ABOVE LINES"
 
 # all the common rc files
 DOT_FILES= \
@@ -32,6 +34,10 @@ BIN_FILES = \
 	myscreen \
 	rprompt \
 	sourceAuthSocket \
+
+# expected resources
+EXPECTED_FILES = \
+	lesspipe.sh
 
 dot_files: $(DOT_FILES)
 	@for f in $?; do \
@@ -65,3 +71,26 @@ pydist:
 	    echo "local package install enabled" ; \
 	fi
 
+# report on exceptions to full install
+status:
+	@for f in $(DOT_FILES); do \
+	    if ! test -h ~/.$$f ; then \
+		echo "WARNING: not using ./.$$f"; \
+	    fi; \
+	done 
+	@for f in $(BIN_FILES); do \
+	    if ! test -h ~/bin/$$f ; then \
+		echo "WARNING: ~/bin/$$f is NOT active"; \
+	    fi; \
+	done 
+	@for f in $(EXPECTED_FILES); do \
+	    if ! type -p $$f &>/dev/null ; then \
+		echo "WARNING: $$f not installed on system"; \
+	    fi; \
+	done
+	@if test -h ~/.pydistutils.cfg ; then \
+	    echo "WARNING: local package install enabled" ; \
+	fi
+	@if ! git status | grep -q '^nothing to commit' ; then \
+	    echo "WARNING: uncommited changes" ; \
+	fi
