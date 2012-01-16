@@ -9,6 +9,10 @@ else
     lessc() { less "$@"; }
 fi
 
+if type -p lesspipe.sh &>/dev/null ; then
+    export LESSOPEN="|lesspipe.sh %s"
+fi
+
 [ -r ~/bin/rprompt ] && PROMPT_COMMAND='source ~/bin/rprompt'
 
 if [ -r ~/bin/virtualenvwrapper.sh ] ; then
