@@ -46,3 +46,10 @@ host = smtp.sonic.net
 style = gitweb
 
 patchbomb =
+
+# from http://mercurial.selenic.com/wiki/PagerExtension
+[pager]
+pager = LESS='FSRX' less
+attend = annotate, cat, diff, export, glog, log, qdiff, help
+[extensions]
+pager =
