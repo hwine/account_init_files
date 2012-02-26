@@ -34,10 +34,20 @@ BIN_FILES = \
 	myscreen \
 	rprompt \
 	sourceAuthSocket \
+	ack \
+
+
+ack:
+	curl http://betterthangrep.com/ack-standalone > $@
+	chmod 0755 $@
+
+lesspipe.sh: 
+	curl -O http://www-zeuthen.desy.de/~friebel/unix/less/lesspipe.tar.gz
 
 # expected resources
 EXPECTED_FILES = \
-	lesspipe.sh
+	lesspipe.sh \
+	ack \
 
 dot_files: $(DOT_FILES)
 	@for f in $?; do \

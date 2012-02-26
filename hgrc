@@ -19,13 +19,13 @@ opts.sourcetreediff=
 [extensions]
 ;imerge=
 bookmarks=
-hgk=
+;hgk=
 ;hgk=/Users/hwine/Library/Python/2.5/site-packages/mercurial-0.9.5-py2.5-macosx-10.3-fat.egg/hgext/hgk.py
 #hgext.convert=
-hgext.graphlog=
+;hgext.graphlog=
 ;graphviz = /Users/hwine/tmp/hg/playpen/graphviz.py
 hgext.mq=
-hgext.bookmarks =
+;hgext.bookmarks =
 hggit = 
 #hgext.purge=
 
@@ -53,3 +53,9 @@ pager = LESS='FSRX' less
 attend = annotate, cat, diff, export, glog, log, qdiff, help
 [extensions]
 pager =
+;zeroconf=
+
+# trial stuff
+[extensions]
+convert =
+graphlog =

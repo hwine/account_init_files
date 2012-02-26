@@ -1,6 +1,3 @@
-[ -r /etc/profile ] && . /etc/profile
-[ -r ~/.bashrc ] && . ~/.bashrc
-
 export HISTCONTROL=ignoreboth
 
 ## add X11 paths if xterm
@@ -39,4 +36,8 @@ if test -d /opt/local/bin ; then
     *) export PATH=/opt/local/bin:/opt/local/sbin:$PATH ;;
     esac
 fi
+
+# wait to do this until path is set
+[ -r /etc/profile ] && . /etc/profile
+[ -r ~/.bashrc ] && . ~/.bashrc
 
