@@ -22,6 +22,7 @@ DOT_FILES= \
 	gitk \
 	gvimrc \
 	hgignore \
+	hgignore_global \
 	hgrc \
 	inputrc \
 	screenrc \
