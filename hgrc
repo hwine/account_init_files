@@ -55,8 +55,13 @@ attend = annotate, cat, diff, export, glog, log, qdiff, help
 pager =
 ;zeroconf=
 
+[git]
+intree = 1
+
 # trial stuff
 [extensions]
 convert =
 graphlog =
 ;share =
+
+

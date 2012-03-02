@@ -26,6 +26,7 @@ DOT_FILES= \
 	hgrc \
 	inputrc \
 	screenrc \
+	tmux.conf \
 	vimrc \
 	xinitrc \
 
