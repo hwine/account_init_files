@@ -39,6 +39,6 @@ if test -d /opt/local/bin ; then
 fi
 
 # wait to do this until path is set
-[ -r /etc/profile ] && . /etc/profile
+#[ -r /etc/profile ] && . /etc/profile
 [ -r ~/.bashrc ] && . ~/.bashrc
 

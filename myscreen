@@ -3,8 +3,8 @@
 # run a screen based on the host name - useful with multiple logins
 # where home directory is shared.
 
-# Since this will invoke a login shell, clear the path first on a mac
-# (only way to work around doubling caused by /usr/libexec/path_helper)
+# Since screen will invoke a login shell, clear the path first on a mac
+# (otherwise /usr/libexec/path_helper ends up doubling the path)
 if test -f /usr/libexec/path_helper; then
     PATH=
 fi
