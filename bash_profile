@@ -1,4 +1,5 @@
 export HISTCONTROL=ignoreboth
+export IGNOREEOF=3
 
 ## add X11 paths if xterm
 #case $TERM in
