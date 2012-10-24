@@ -78,9 +78,13 @@ pydist:
 	@if test -h ~/.pydistutils.cfg ; then \
 	    unlink ~/.pydistutils.cfg ; \
 	    echo "local package install disabled" ; \
-	else \
+	elif test -f $(PWD)/pydistutils.cfg ; then \
 	    ln -s $(PWD)/pydistutils.cfg ~/.pydistutils.cfg; \
 	    echo "local package install enabled" ; \
+	else \
+	    echo "local package install NOT enabled" ; \
+	    echo "you may be in the wrong directory" ; \
+	    exit 1 ; \
 	fi
 
 # report on exceptions to full install
