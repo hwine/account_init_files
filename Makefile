@@ -43,6 +43,20 @@ ack:
 	curl http://betterthangrep.com/ack-standalone > $@
 	chmod 0755 $@
 
+vimack:
+	curl -L https://github.com/mileszs/ack.vim/archive/master.tar.gz > /tmp/ackvim.tgz
+	tar xzf /tmp/ackvim.tgz -C /tmp/
+	for f in /tmp/ack.vim-master/doc/* ; do \
+	    cp -i $$f $(HOME)/.vim/doc/ ; \
+	done
+	vim --cmd "helptags $(HOME)/.vim/doc/" --cmd quit
+	for f in /tmp/ack.vim-master/plugin/* ; do \
+	    cp -i $$f $(HOME)/.vim/plugin/ ; \
+	done
+	rm -rf /tmp/ackvim.tgz /tmp/ack.vim-master
+
+
+
 lesspipe.sh: 
 	curl -O http://www-zeuthen.desy.de/~friebel/unix/less/lesspipe.tar.gz
 
