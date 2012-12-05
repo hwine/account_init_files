@@ -1,5 +1,7 @@
 set -o vi
 
+export MOZ_USER=${MOZ_USER:-hwine}
+
 alias ll=ls\ -lF
 alias ls=ls\ -F
 
@@ -12,6 +14,8 @@ fi
 if type -p lesspipe.sh &>/dev/null ; then
     export LESSOPEN="|lesspipe.sh %s"
 fi
+
+function jsonlint() { python -c "import json; json.load(open('$1'))"; }
 
 [ -r ~/bin/rprompt ] && PROMPT_COMMAND='source ~/bin/rprompt'
 
@@ -26,3 +30,5 @@ fi
 if [ -r ~/tools/Mercurial/hgtab/hgtab-bash.sh ] ; then
     source ~/tools/Mercurial/hgtab/hgtab-bash.sh
 fi
+
+#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

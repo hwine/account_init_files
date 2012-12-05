@@ -20,3 +20,8 @@
 [mergetool "sourcetree"]
 	cmd = /Volumes/SourceTree/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[alias]
+        graph = log --graph --date-order -C -M --pretty=format:"<%h> %ad [%an] %Cgreen%d%Creset %s" --all --date=short
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	ls = "!f () { set | grep GIT;} ; f"
+

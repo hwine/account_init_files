@@ -1,5 +1,7 @@
 syntax: glob
 
+.git
 *~
 .DS_Store
-*.pyc
+*.py[co]
+.*.swp

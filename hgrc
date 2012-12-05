@@ -1,6 +1,6 @@
 [ui]
 username=Hal Wine <hwine@mozilla.com>
-ignore=/Users/Hal/.hgignore_global
+ignore=$HOME/.hgignore_global
 [merge-tools]
 sourcetreemerge.gui=False
 sourcetreebulkmerge.gui=False
@@ -26,7 +26,7 @@ bookmarks=
 ;graphviz = /Users/hwine/tmp/hg/playpen/graphviz.py
 hgext.mq=
 ;hgext.bookmarks =
-hggit = 
+;hggit = 
 #hgext.purge=
 
 [bookmarks]
@@ -62,6 +62,7 @@ intree = 1
 [extensions]
 convert =
 graphlog =
+;gpg =
 ;share =
 
 
