@@ -46,6 +46,7 @@ ack:
 vimack:
 	curl -L https://github.com/mileszs/ack.vim/archive/master.tar.gz > /tmp/ackvim.tgz
 	tar xzf /tmp/ackvim.tgz -C /tmp/
+	mkdir -p $(HOME)/.vim/{doc,plugin,after}
 	for f in /tmp/ack.vim-master/doc/* ; do \
 	    cp -i $$f $(HOME)/.vim/doc/ ; \
 	done
