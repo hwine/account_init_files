@@ -102,6 +102,22 @@ set statusline=%f%m%r%h%w\ [%{&ff}]\ %y%=[\%03.3b/\%02.2B]\ (%v,%l/%L)[%p%%]
 :nnoremap <C-p><C-r> :Rst<CR>
 au BufReadCmd *.jar,*.xpi,*.egg call zip#Browse(expand("<amatch>"))
 "
+" open URL under cursor (Mac version)
+" from: http://stackoverflow.com/questions/9458294/open-url-under-cursor-in-vim-with-browser
+function! OpenUrlUnderCursor()
+    " let path="/Applications/Safari.app"
+    execute "normal BvEy"
+    let url=matchstr(@0, '[a-z]*:\/\/[^ >,;]*')
+    if url != ""
+        " silent exec "!open -a ".path." '".url."'" | redraw! 
+        silent exec "!open '".url."'" | redraw! 
+        echo "opened ".url
+    else
+        echo "No URL under cursor."
+    endif
+endfunction
+nmap <leader>o :call OpenUrlUnderCursor()<CR>
+
 " set up vim organizer START
 " This is an example vimrc that should work for testing purposes.
 " Integrate the VimOrganizer specific sections into your own
