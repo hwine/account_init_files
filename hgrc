@@ -66,3 +66,5 @@ graphlog =
 ;share =
 
 
+[alias]
+qstatus = qseries -v
