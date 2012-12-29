@@ -119,6 +119,7 @@ function! OpenUrlUnderCursor()
 endfunction
 nmap <leader>u :call OpenUrlUnderCursor()<CR>
 
-"
+filetype plugin indent on
+
 " set fileformats=unix
 " vim: set ft=vim :
