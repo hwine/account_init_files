@@ -110,13 +110,14 @@ function! OpenUrlUnderCursor()
     let url=matchstr(@0, '[a-z]*:\/\/[^ >,;]*')
     if url != ""
         " silent exec "!open -a ".path." '".url."'" | redraw! 
-        silent exec "!open '".url."'" | redraw! 
+        " silent exec "!open '".url."'" | redraw! 
+        silent exec "!open '".url."'" 
         echo "opened ".url
     else
         echo "No URL under cursor."
     endif
 endfunction
-nmap <leader>o :call OpenUrlUnderCursor()<CR>
+nmap <leader>u :call OpenUrlUnderCursor()<CR>
 
 "
 " set fileformats=unix
