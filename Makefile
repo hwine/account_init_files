@@ -1,16 +1,12 @@
 # Activate/deactivate config files as needed
 
-.Phony: help
+.Phony: help install pydist status vim_pathogen
 help: 
 	@echo "Manage config files"
 	@echo "  help - this message"
 	@echo "  install - create symlinks for common files"
 	@echo "  pydist - toggle local user install of python packages"
 	@echo "  status	- report on state of installation"
-
-# normal install consists of both scripts and rc files
-install: bin_files dot_files
-	@echo "# REMEMBER TO EXECUTE THE ABOVE LINES"
 
 # all the common rc files
 DOT_FILES= \
@@ -30,6 +26,10 @@ DOT_FILES= \
 	vimrc \
 	xinitrc \
 
+# other targets that install things similar to dotfiles
+MISC_TARGETS= \
+	vim_pathogen
+
 # my scripts
 BIN_FILES = \
 	git-diff-driver \
@@ -39,11 +39,15 @@ BIN_FILES = \
 	ack \
 
 
+# normal install consists of both scripts and rc files
+install: bin_files dot_files $(MISC_TARGETS)
+	@echo "# REMEMBER TO EXECUTE THE ABOVE LINES"
+
 ack:
 	curl http://betterthangrep.com/ack-standalone > $@
 	chmod 0755 $@
 
-vimack:
+vimack: ack
 	curl -L https://github.com/mileszs/ack.vim/archive/master.tar.gz > /tmp/ackvim.tgz
 	tar xzf /tmp/ackvim.tgz -C /tmp/
 	mkdir -p $(HOME)/.vim/{doc,plugin,after}
@@ -56,7 +60,15 @@ vimack:
 	done
 	rm -rf /tmp/ackvim.tgz /tmp/ack.vim-master
 
-
+vim_pathogen:
+	# see commit message for pathogen.vim for version details
+	@if test -h ~/.vim/autoload/pathogen.vim ; then \
+	    echo "#~/.vim/autoload/pathogen.vim  is already symlinked"; \
+	elif test -f ~/.vim/autoload/pathogen.vim ; then \
+	    echo "#~/.vim/autoload/pathogen.vim exists already"; \
+	else \
+	    echo "ln -s $(PWD)/pathogen.vim" ~/.vim/autoload/pathogen.vim; \
+	fi; \
 
 lesspipe.sh: 
 	curl -O http://www-zeuthen.desy.de/~friebel/unix/less/lesspipe.tar.gz

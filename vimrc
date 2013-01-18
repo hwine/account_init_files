@@ -1,3 +1,13 @@
+" Pathogen load
+execute pathogen#infect()
+" Pathogen load of python-mode
+filetype off
+
+call pathogen#infect()
+call pathogen#helptags()
+
+filetype plugin indent on
+syntax on
 version 6.0
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
