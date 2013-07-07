@@ -1,5 +1,9 @@
 export HISTCONTROL=ignoreboth
-export IGNOREEOF=3
+if test $SHLVL -le 3; then
+    # 1 is first shell, 2 is first shell in screen, 3 is first shell in tmux
+    # be sure not to export
+    IGNOREEOF=3
+fi
 
 ## add X11 paths if xterm
 #case $TERM in

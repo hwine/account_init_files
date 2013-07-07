@@ -107,6 +107,7 @@ set hlsearch
 set nocompatible
 set smartindent
 set nospell
+set showcmd
 set statusline=%f%m%r%h%w\ [%{&ff}]\ %y%=[\%03.3b/\%02.2B]\ (%v,%l/%L)[%p%%]
 :command! Rst :!rst2html.py "%" > /tmp/rstprev.html && open /tmp/rstprev.html
 :nnoremap <C-p><C-r> :Rst<CR>
@@ -117,7 +118,8 @@ au BufReadCmd *.jar,*.xpi,*.egg call zip#Browse(expand("<amatch>"))
 function! OpenUrlUnderCursor()
     " let path="/Applications/Safari.app"
     execute "normal BvEy"
-    let url=matchstr(@0, '[a-z]*:\/\/[^ >,;]*')
+    " add '#' to match fragments, '&', '?' for query strings
+    let url=matchstr(@0, '[a-z]*:\/\/[^ >,;#?&]*')
     if url != ""
         " silent exec "!open -a ".path." '".url."'" | redraw! 
         " silent exec "!open '".url."'" | redraw! 
@@ -130,6 +132,12 @@ endfunction
 nmap <leader>u :call OpenUrlUnderCursor()<CR>
 
 filetype plugin indent on
+
+" from kovidgoyal http://www.mobileread.com/forums/showthread.php?t=103114
+au BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
+
+" test of pylint
+let g:pymode_lint_checker = "pyflakes,pylint,pep8" 
 
 " set fileformats=unix
 " vim: set ft=vim :

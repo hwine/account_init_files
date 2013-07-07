@@ -2,6 +2,7 @@ set -o vi
 
 export MOZ_USER=${MOZ_USER:-hwine}
 export PASTEBIN_NAME=${PASTEBIN_NAME:-hwine}
+export VISUAL=vim
 
 alias ll=ls\ -lF
 alias ls=ls\ -F
