@@ -29,6 +29,11 @@ elif [ -r ~/bin/virtualenvwrapper_bashrc ] ; then
     source ~/bin/virtualenvwrapper_bashrc
 fi
 
+if [ -r ~/bin/na.sh ] ; then
+    # from https://github.com/ttscoff/na
+    source ~/bin/na.sh
+fi
+
 if [ -r ~/tools/Mercurial/hgtab/hgtab-bash.sh ] ; then
     source ~/tools/Mercurial/hgtab/hgtab-bash.sh
 fi
