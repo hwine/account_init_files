@@ -44,7 +44,8 @@ install: bin_files dot_files $(MISC_TARGETS)
 	@echo "# REMEMBER TO EXECUTE THE ABOVE LINES"
 
 ack:
-	curl http://betterthangrep.com/ack-standalone > $@
+	# stay with 1.x as we don't like loss of -a option
+	curl http://beyondgrep.com/ack-1.96-single-file > $@
 	chmod 0755 $@
 
 vimack: ack

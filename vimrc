@@ -114,17 +114,18 @@ set statusline=%f%m%r%h%w\ [%{&ff}]\ %y%=[\%03.3b/\%02.2B]\ (%v,%l/%L)[%p%%]
 au BufReadCmd *.jar,*.xpi,*.egg call zip#Browse(expand("<amatch>"))
 "
 " open URL under cursor (Mac version)
-" from: http://stackoverflow.com/questions/9458294/open-url-under-cursor-in-vim-with-browser
+" from:
+" http://stackoverflow.com/questions/9458294/open-url-under-cursor-in-vim-with-browser#abc_def
 function! OpenUrlUnderCursor()
     " let path="/Applications/Safari.app"
     execute "normal BvEy"
     " add '#' to match fragments, '&', '?' for query strings
-    let url=matchstr(@0, '[a-z]*:\/\/[^ >,;#?&]*')
+    let url=matchstr(@0, '[a-z]*:\/\/[^ >,;]*')
     if url != ""
         " silent exec "!open -a ".path." '".url."'" | redraw! 
         " silent exec "!open '".url."'" | redraw! 
-        silent exec "!open '".url."'" 
-        echo "opened ".url
+        exec "!open '".@0."'" 
+        echom "opened ".@0
     else
         echo "No URL under cursor."
     endif
@@ -139,5 +140,7 @@ au BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
 " test of pylint
 let g:pymode_lint_checker = "pyflakes,pylint,pep8" 
 
+" from learning vimscript the hard way
+set shiftround  " < & > always work with multiples of sw
 " set fileformats=unix
 " vim: set ft=vim :
