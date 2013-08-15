@@ -1,6 +1,6 @@
 # Activate/deactivate config files as needed
 
-.Phony: help install pydist status vim_pathogen
+.Phony: help install pydist status vim_pathogen vim_after
 help: 
 	@echo "Manage config files"
 	@echo "  help - this message"
@@ -28,7 +28,9 @@ DOT_FILES= \
 
 # other targets that install things similar to dotfiles
 MISC_TARGETS= \
-	vim_pathogen
+	vim_pathogen \
+	vim_after \
+
 
 # my scripts
 BIN_FILES = \
@@ -60,6 +62,15 @@ vimack: ack
 	    cp -i $$f $(HOME)/.vim/plugin/ ; \
 	done
 	rm -rf /tmp/ackvim.tgz /tmp/ack.vim-master
+
+vim_after:
+	@if test -h ~/.vim/after ; then \
+	    echo "#~/.vim/after  is already symlinked"; \
+	elif test -f ~/.vim/after ; then \
+	    echo "#~/.vim/after exists already"; \
+	else \
+	    echo "ln -s $(PWD)/vim-after ~/.vim/after"; \
+	fi; \
 
 vim_pathogen:
 	# see commit message for pathogen.vim for version details
