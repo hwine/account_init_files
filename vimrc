@@ -130,7 +130,7 @@ function! OpenUrlUnderCursor()
         echo "No URL under cursor."
     endif
 endfunction
-nmap <leader>u :call OpenUrlUnderCursor()<CR>
+nnoremap <leader>u :call OpenUrlUnderCursor()<CR>
 
 filetype plugin indent on
 
@@ -140,7 +140,15 @@ au BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
 " test of pylint
 let g:pymode_lint_checker = "pyflakes,pylint,pep8" 
 
-" from learning vimscript the hard way
+" from learning vimscript the hard way  
 set shiftround  " < & > always work with multiples of sw
+" edit vimrc, then source it
+:nnoremap <leader>ev :split $MYVIMRC<cr>
+:nnoremap <leader>sv :source $MYVIMRC<cr>
+" set a new escape from insert, and disable the old one
+:inoremap jk <esc>
+:inoremap <esc> <nop>
+" sign
+:iabbrev @@ --Hal Wine<cr>hwine@mozilla.com
 " set fileformats=unix
 " vim: set ft=vim :
