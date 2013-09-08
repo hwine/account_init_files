@@ -1,0 +1,58 @@
+#!/usr/bin/env python
+""" pull out @due times from supplied taskpaper files
+"""
+
+import fileinput
+import re
+import sys
+from datetime import date, datetime
+from termcolor import colored
+
+re_due = re.compile(r'@due(\(([^\)]+)\))?')
+re_done = re.compile(r'@done(\(([^\)]+)\))?')
+re_na = re.compile(r'@na\b')
+re_today = re.compile(r'@today\b')
+
+if __name__ == "__main__":
+    due_list = []
+    now = datetime.fromordinal(date.today().toordinal())
+    next_step = now.replace(second=1)
+    for line in fileinput.input():
+        #print "due %s" % re_due.search(line)
+        if re_done.search(line):
+            continue
+        match = re_due.search(line)
+        if match:
+            if match.group(1):
+                # there was a date supplied
+                try:
+                    due_date = datetime.strptime(match.group(2), "%Y-%m-%d")
+                except ValueError:
+                    print >> sys.stderr, "Can't parse '%s', using today" % \
+                        (match.group(2),)
+                    due_date = now
+            else:
+                due_date = now
+        elif re_today.search(line):
+            # today
+            due_date = now
+        elif re_na.search(line):
+            # next steps (actions) come right after due today
+            due_date = next_step
+        else:
+            # no @due or @na, unintersting
+            continue
+        # add to list
+        due_list.append((due_date, line))
+    if len(due_list):
+        due_list.sort()
+        for due, item in due_list:
+            if due < now:
+                clr = 'red'
+            elif due > next_step:
+                clr = 'green'
+            else:
+                clr = 'yellow'
+            print colored(due.strftime('%Y-%m-%d'), clr), item.strip()
+    else:
+        print "nothing due"

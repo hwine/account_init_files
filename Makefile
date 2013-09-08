@@ -39,6 +39,7 @@ BIN_FILES = \
 	rprompt \
 	sourceAuthSocket \
 	ack \
+	tp-due \
 
 
 # normal install consists of both scripts and rc files
