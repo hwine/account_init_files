@@ -9,3 +9,4 @@ set comments=fb:#.,fb:-,fb:*    " get rid of C comments
                                 " * for bullet list
 
 set nosmartindent   " don't want "comments in column 0" feature
+set spell           " it's English text, let's get the spelling right

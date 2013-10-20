@@ -1,6 +1,7 @@
 [ui]
 username=Hal Wine <hwine@mozilla.com>
 ignore=$HOME/.hgignore_global
+color=True
 [merge-tools]
 sourcetreemerge.gui=False
 sourcetreebulkmerge.gui=False
@@ -30,6 +31,7 @@ hgext.mq=
 #hgext.purge=
 bzexport = /Users/Hal/repos/bzexport/bzexport.py
 qimportbz = /Users/Hal/repos/qimportbz
+color =
 
 [bookmarks]
 track.current = True

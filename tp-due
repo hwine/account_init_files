@@ -3,13 +3,14 @@
 """
 
 import fileinput
+import os
 import re
 import sys
 from datetime import date, datetime
 from termcolor import colored
 
-re_due = re.compile(r'@due(\(([^\)]+)\))?')
-re_done = re.compile(r'@done(\(([^\)]+)\))?')
+re_due = re.compile(r'@(due|followup)(\(([^\)]+)\))?')
+re_done = re.compile(r'@(done|cancelled)(\(([^\)]+)\))?')
 re_na = re.compile(r'@na\b')
 re_today = re.compile(r'@today\b')
 
@@ -23,13 +24,13 @@ if __name__ == "__main__":
             continue
         match = re_due.search(line)
         if match:
-            if match.group(1):
+            if match.group(3):
                 # there was a date supplied
                 try:
-                    due_date = datetime.strptime(match.group(2), "%Y-%m-%d")
+                    due_date = datetime.strptime(match.group(3), "%Y-%m-%d")
                 except ValueError:
                     print >> sys.stderr, "Can't parse '%s', using today" % \
-                        (match.group(2),)
+                        (match.group(3),)
                     due_date = now
             else:
                 due_date = now
@@ -43,16 +44,23 @@ if __name__ == "__main__":
             # no @due or @na, unintersting
             continue
         # add to list
-        due_list.append((due_date, line))
+        due_list.append((due_date, line, fileinput.filename()))
     if len(due_list):
         due_list.sort()
-        for due, item in due_list:
+        for due, item, fname in due_list:
             if due < now:
                 clr = 'red'
+            elif due == now:
+                clr = 'magenta'
             elif due > next_step:
                 clr = 'green'
             else:
                 clr = 'yellow'
-            print colored(due.strftime('%Y-%m-%d'), clr), item.strip()
+            # print the name of the file, without path or extension
+            short_name = os.path.basename(fname)
+            short_name = os.path.splitext(short_name)[0]
+            base_name = "<%s>" % (os.path.basename(short_name),)
+            print colored(due.strftime('%Y-%m-%d'), clr), item.strip(), \
+                base_name
     else:
         print "nothing due"
