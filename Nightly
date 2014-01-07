@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# start up whatever with output in fresh log file
+
+base_dir='/Applications/Firefoxes'
+channel="${0##*/}"
+case "$channel" in
+    Beta)
+        app_name="Firefox Beta"
+        ;;
+    Nightly|Aurora)
+        app_name=$channel
+        ;; # good to go
+    *) die "unknown channel '$channel'" ;;
+esac
+log_dir=/var/tmp/Firefox/$channel
+base_log_name=ff$channel.log
+
+logs_to_keep=5
+mkdir -p $log_dir
+cd $log_dir
+
+existing_logs=$(ls $base_log_name* 2>/dev/null | wc -l)
+
+function log_name_n() {
+    local -i num="$1"
+    local log_name=$base_log_name
+    if test $num -gt 0; then
+        log_name=$base_log_name.$num.gz
+    fi
+    echo $log_name
+}
+
+# shuffle the older logs
+for ((i=$logs_to_keep; i>1; i--)); do
+    cur_log_name=$(log_name_n $i)
+    old_log_name=$(log_name_n $((i-1)))
+    rm -f $cur_log_name
+    if test -r $old_log_name; then
+        mv -i $old_log_name $cur_log_name
+    fi
+done
+# compress latest one
+if test -r $base_log_name; then
+    mv -i $base_log_name $base_log_name.1
+    gzip -9 $base_log_name.1
+fi
+
+# now start app with latest as log
+"$base_dir/$app_name.app/Contents/MacOS/firefox-bin" \
+    >$base_log_name 2>&1 &
+
