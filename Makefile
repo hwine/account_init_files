@@ -39,6 +39,8 @@ BIN_FILES = \
 	rprompt \
 	sourceAuthSocket \
 	ack \
+	q \
+	jq \
 	tp-due \
 
 
@@ -49,6 +51,16 @@ install: bin_files dot_files $(MISC_TARGETS)
 ack:
 	# stay with 1.x as we don't like loss of -a option
 	curl http://beyondgrep.com/ack-1.96-single-file > $@
+	chmod 0755 $@
+
+q:
+	# may be useful
+	curl https://raw.github.com/harelba/q/master/q > $@
+	chmod 0755 $@
+
+jq:
+	# may be useful
+	curl http://stedolan.github.io/jq/download/osx64/jq > $@
 	chmod 0755 $@
 
 vimack: ack

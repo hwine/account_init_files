@@ -1,2 +1,4 @@
 ack
 *.orig
+q
+jq

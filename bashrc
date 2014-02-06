@@ -18,6 +18,7 @@ if type -p lesspipe.sh &>/dev/null ; then
 fi
 
 function jsonlint() { python -c "import json; json.load(open('$1'))"; }
+function lf(){ ls -t | head -1 ;}
 
 [ -r ~/bin/rprompt ] && PROMPT_COMMAND='source ~/bin/rprompt'
 

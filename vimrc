@@ -41,17 +41,10 @@ filetype plugin indent on     " required!
 "
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle commands are not allowed (on same line)
-" Pathogen load
-execute pathogen#infect()
-" Pathogen load of python-mode
-filetype off
-
-call pathogen#infect()
-call pathogen#helptags()
 
 filetype plugin indent on
 syntax on
-version 6.0
+"version 6.0
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
@@ -193,7 +186,7 @@ set shiftround  " < & > always work with multiples of sw
 :inoremap <esc> <nop>
 " sign
 :iabbrev @@ --Hal Wine<cr>hwine@mozilla.com
-" set fileformats=unix
+set fileformats="unix,dos"
 
 set hidden
 " vim: set ft=vim :
