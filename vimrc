@@ -145,8 +145,11 @@ set smartindent
 set nospell
 set showcmd
 set statusline=%f%m%r%h%w\ [%{&ff}]\ %y%=[\%03.3b/\%02.2B]\ (%v,%l/%L)[%p%%]
-:command! Rst :!rst2html.py "%" > /tmp/rstprev.html && open /tmp/rstprev.html
-:nnoremap <C-p><C-r> :Rst<CR>
+function! PreviewReST()
+    silent exec "!rst2html.py '%' > /tmp/rstprev.html && open /tmp/rstprev.html"
+    redraw!
+endfunction
+:nnoremap <C-p><C-r> :call PreviewReST()<CR>
 au BufReadCmd *.jar,*.xpi,*.egg call zip#Browse(expand("<amatch>"))
 "
 " open URL under cursor (Mac version)
@@ -160,8 +163,8 @@ function! OpenUrlUnderCursor()
     if url != ""
         " silent exec "!open -a ".path." '".url."'" | redraw! 
         " silent exec "!open '".url."'" | redraw! 
-        exec "!open '".@0."'" 
-        echom "opened ".@0
+        silent exec "!open '".@0."'" 
+        echom "opened ".@0 | redraw!
     else
         echo "No URL under cursor."
     endif
@@ -189,4 +192,7 @@ set shiftround  " < & > always work with multiples of sw
 set fileformats="unix,dos"
 
 set hidden
+" workaround for https://github.com/klen/python-mode/issues/342
+" plus mkdir ~/.ropeproject ; chmod $_ 0000
+let g:pymode_rope_lookup_project = 0
 " vim: set ft=vim :

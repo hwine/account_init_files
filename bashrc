@@ -4,8 +4,8 @@ export MOZ_USER=${MOZ_USER:-hwine}
 export PASTEBIN_NAME=${PASTEBIN_NAME:-hwine}
 export VISUAL=vim
 
-alias ll=ls\ -lF
-alias ls=ls\ -F
+alias ll=ls\ -lFG
+alias ls=ls\ -FG
 
 if [ -r /usr/share/vim/vim73/macros/less.sh ]; then
     lessc() { /usr/share/vim/vim73/macros/less.sh "$@"; }
@@ -18,7 +18,7 @@ if type -p lesspipe.sh &>/dev/null ; then
 fi
 
 function jsonlint() { python -c "import json; json.load(open('$1'))"; }
-function lf(){ ls -t | head -1 ;}
+function lf(){ \ls -t | head -1 ;}
 
 [ -r ~/bin/rprompt ] && PROMPT_COMMAND='source ~/bin/rprompt'
 
