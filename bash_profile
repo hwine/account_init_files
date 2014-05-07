@@ -46,6 +46,7 @@ fi
 #[ -r /etc/profile ] && . /etc/profile
 [ -r ~/.bashrc ] && . ~/.bashrc
 
+export DOCKER_HOST=tcp://localhost:4244
 
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 export PATH="$HOME/.rbenv/bin:$PATH"
