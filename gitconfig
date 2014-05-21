@@ -1,27 +1,36 @@
 [user]
-	name = Hal Wine
-	email = hwine@mozilla.com
+        name = Hal Wine
+        email = hwine@mozilla.com
 [core]
-	excludesfile = /Users/Hal/.gitignore_global
+        excludesfile = /Users/Hal/.gitignore_global
+        whitespace = trailing-space,space-before-tab,tab-in-indent
+        editor = vim
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+        cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+        path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+        cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+        trustExitCode = true
 [diff]
 [gui]
-	recentrepo = /Users/hwine/tmp/trac-git/sys_trac_hg/trac_hacks/gitplugin
+        recentrepo = /Users/hwine/tmp/trac-git/sys_trac_hg/trac_hacks/gitplugin
 [color]
-	ui = auto
+        branch = auto
+        diff = auto
+        grep = auto
+        interactive = auto
+        status = auto
+        ui = auto
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+        cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+        path = 
 [mergetool "sourcetree"]
-	cmd = /Volumes/SourceTree/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+        cmd = /Volumes/SourceTree/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+        trustExitCode = true
 [alias]
         graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
-	lol = log --graph --decorate --pretty=oneline --abbrev-commit
-	ls = "!f () { set | grep GIT;} ; f"
+        lol = log --graph --decorate --pretty=oneline --abbrev-commit
+        ls = "!f () { set | grep GIT;} ; f"
 
+[push]
+        default = current

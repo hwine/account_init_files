@@ -13,6 +13,7 @@ fi
 #esac
 
 export PATH
+export CDPATH=$CDPATH${CDPATH:+:}~/repos
 
 # the above path trick on Tiger ensures Terminal doesn't get X11 in
 # path, but we do want to use xterm-color (Terminal's default TERM) if
@@ -48,6 +49,5 @@ fi
 
 export DOCKER_HOST=tcp://localhost:4244
 
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# fix up path for 'brew' -- leave duplicates for now
+PATH=/usr/local/bin:$PATH
