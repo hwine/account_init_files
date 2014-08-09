@@ -1,4 +1,5 @@
 " Vundle setup
+if isdirectory($HOME . "/.vim")
 set nocompatible              " be iMproved
 filetype off                  " required!
 
@@ -41,6 +42,7 @@ filetype plugin indent on     " required!
 "
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle commands are not allowed (on same line)
+endif
 
 filetype plugin indent on
 syntax on
