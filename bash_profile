@@ -28,6 +28,14 @@ test -n "$DISPLAY" && TERM=xterm-color || :
 # for now (2008-08-03)
 TERM=xterm
 
+# homebrew
+if test -d /usr/local/bin ; then
+    case ":$PATH:" in
+    *:/usr/local/bin:*) ;; # already in
+    *) export PATH=/usr/local/bin:$PATH ;;
+    esac
+fi
+
 if test -d $HOME/bin ; then
     case ":$PATH:" in
     *:$HOME/bin:*) ;; # already in
@@ -48,6 +56,3 @@ fi
 [ -r ~/.bashrc ] && . ~/.bashrc
 
 export DOCKER_HOST=tcp://localhost:4244
-
-# fix up path for 'brew' -- leave duplicates for now
-PATH=/usr/local/bin:$PATH

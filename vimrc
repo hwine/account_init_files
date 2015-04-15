@@ -3,20 +3,23 @@ if isdirectory($HOME . "/.vim")
 set nocompatible              " be iMproved
 filetype off                  " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
-" My bundles here:
+" My plugins here:
 "
 "Bundle 'Rykka/riv.vim'
 Bundle 'file:///~/.vim/bundle/ctrlp.vim/'
-Bundle 'klen/python-mode'
-Bundle 'davidoc/taskpaper.vim'
-Bundle 'RST-Tables'
+Plugin 'klen/python-mode'
+"Bundle 'davidoc/taskpaper.vim'
+Plugin 'RST-Tables'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'vim-scripts/vimwiki'
+Plugin 'chikamichi/mediawiki.vim.git'
 
 " original repos on GitHub
 ""Bundle 'tpope/vim-fugitive'
@@ -31,8 +34,8 @@ Bundle 'RST-Tables'
 """ Git repos on your local machine (i.e. when working on your own plugin)
 ""Bundle 'file:///Users/gmarik/path/to/plugin'
 """ ...
+call vundle#end()
 
-filetype plugin indent on     " required!
 "
 " Brief help
 " :BundleList          - list configured bundles
