@@ -56,3 +56,5 @@ fi
 [ -r ~/.bashrc ] && . ~/.bashrc
 
 export DOCKER_HOST=tcp://localhost:4244
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"

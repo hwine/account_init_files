@@ -13,13 +13,14 @@ Plugin 'gmarik/Vundle.vim'
 " My plugins here:
 "
 "Bundle 'Rykka/riv.vim'
-Bundle 'file:///~/.vim/bundle/ctrlp.vim/'
+Plugin 'kien/ctrlp.vim'
 Plugin 'klen/python-mode'
 "Bundle 'davidoc/taskpaper.vim'
 Plugin 'RST-Tables'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-scripts/vimwiki'
 Plugin 'chikamichi/mediawiki.vim.git'
+Plugin 'mileszs/ack.vim'
 
 " original repos on GitHub
 ""Bundle 'tpope/vim-fugitive'
