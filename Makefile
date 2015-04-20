@@ -42,10 +42,11 @@ BIN_FILES = \
 	q \
 	jq \
 	tp-due \
+	repo_type \
 
 
 # normal install consists of both scripts and rc files
-install: bin_files dot_files $(MISC_TARGETS)
+install: bin_files dot_files # $(MISC_TARGETS)
 	@echo "# REMEMBER TO EXECUTE THE ABOVE LINES"
 
 ack:

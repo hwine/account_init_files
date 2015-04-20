@@ -1,0 +1,44 @@
+#!/bin/bash
+
+set -eu
+
+test $# -eq 0 && set .
+
+hg_default_repo() {
+    local repo="$1"
+    local uri
+    uri="$(hg -R $repo path default 2>/dev/null)"
+    if test -z "$uri"; then
+        uri='<not saved>'
+    fi
+    echo $uri
+}
+
+get_repo_type() {
+    local d="$1"
+    local repo_type=
+    if test -d "$d/.hg"; then
+        repo_type="$repo_type hg ($(hg_default_repo $d))"
+    fi
+    if test -d "$d/.git" ; then
+        repo_type="$repo_type git ($(git --git-dir $d/.git remote -v |
+        awk '$1=="origin" && $3=="(fetch)" {print $2}'))"
+    elif test -d "$d/.hg/git"; then
+        repo_type="$repo_type git ($(git --git-dir $d/.hg/git remote -v |
+        awk '$1=="origin" && $3=="(fetch)" {print $2}'))"
+    fi
+    if test -z "$repo_type"; then
+        if ! test "$d" == "/"; then
+            local parent_dir=$(dirname $(cd $d; /bin/pwd))
+            repo_type=$(get_repo_type $parent_dir)
+        else
+            repo_type="(not a repo)"
+        fi
+    fi
+    echo $repo_type
+}
+
+for d; do
+    repo_type=$(get_repo_type $d)
+    echo "$d is $repo_type"
+done
