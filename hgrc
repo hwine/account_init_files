@@ -49,7 +49,7 @@ host = smtp.sonic.net
 
 [web]
 style = gitweb
-cacerts = /etc/hg-dummy-cert.pem
+#cacerts = /etc/hg-dummy-cert.pem
 
 patchbomb =
 

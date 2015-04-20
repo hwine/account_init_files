@@ -43,6 +43,7 @@ BIN_FILES = \
 	jq \
 	tp-due \
 	repo_type \
+	update-keepass-files \
 
 
 # normal install consists of both scripts and rc files
