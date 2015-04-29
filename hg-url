@@ -1,0 +1,40 @@
+#!/usr/bin/env python
+"""
+given rev, construct url to hgweb view
+"""
+
+import argparse
+from sh import hg
+import webbrowser
+
+
+def build_url(repo, args):
+    base_url = hg('--cwd', repo, 'path', 'default').strip()
+    # ensure it's an http url
+    if not base_url.startswith('http'):
+        base_url = 'http' + base_url[base_url.index(':'):]
+    # convert named rev or local id to global id
+    rev_id = hg('--cwd', repo, 'id -i -r'.split(), args.rev).strip()
+    full_url = "%s/rev/%s" % (base_url, rev_id)
+    if args.open:
+        webbrowser.open(full_url)
+    else:
+        print(full_url)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("rev", help='hg revision to open', default='default',
+                        nargs='?')
+    parser.add_argument("--open", "-o", help='open URL in browser',
+                        action='store_true')
+    parser.add_argument("--cwd", "-R", help='repo to use', dest='repos',
+                        action='append')
+    args = parser.parse_args()
+    if args.repos is None:
+        args.repos = ['.']
+    for repo in args.repos:
+        build_url(repo, args)
+
+if __name__ == '__main__':
+    main()

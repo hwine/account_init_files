@@ -14,7 +14,7 @@ DOT_FILES= \
 	bashrc \
 	editrc \
 	gitconfig \
-	gitignore \
+	gitignore_global \
 	gitk \
 	gvimrc \
 	hgignore \
@@ -44,6 +44,7 @@ BIN_FILES = \
 	tp-due \
 	repo_type \
 	update-keepass-files \
+	hg-url \
 
 
 # normal install consists of both scripts and rc files

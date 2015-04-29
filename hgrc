@@ -29,8 +29,8 @@ hgext.mq=
 ;hgext.bookmarks =
 ;hggit = 
 #hgext.purge=
-bzexport = /Users/Hal/repos/bzexport/bzexport.py
-qimportbz = /Users/Hal/repos/qimportbz
+;bzexport = /Users/Hal/repos/bzexport/bzexport.py
+;qimportbz = /Users/Hal/repos/qimportbz
 color =
 
 [bookmarks]

@@ -2,7 +2,7 @@
         name = Hal Wine
         email = hwine@mozilla.com
 [core]
-        excludesfile = /Users/Hal/.gitignore_global
+        excludesfile = ~/.gitignore_global
         whitespace = trailing-space,space-before-tab,tab-in-indent
         editor = vim
 [difftool "sourcetree"]
