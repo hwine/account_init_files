@@ -57,8 +57,9 @@ ack:
 	chmod 0755 $@
 
 q:
-	# may be useful
-	curl https://raw.github.com/harelba/q/master/q > $@
+	# sql queries of csv files - may be useful
+	# now handled by brew, but leaving here for non-darwin
+	curl https://cdn.rawgit.com/harelba/q/1.5.0/bin/q > $@
 	chmod 0755 $@
 
 jq:
