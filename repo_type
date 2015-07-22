@@ -27,6 +27,9 @@ get_repo_type() {
         repo_type="$repo_type git ($(git --git-dir $d/.hg/git remote -v |
         awk '$1=="origin" && $3=="(fetch)" {print $2}'))"
     fi
+    if test -d "$d/.svn" ; then
+        repo_type="$repo_type svn ($(svn info $d | awk '/^Repository Root:/ {print $3}'))"
+    fi
     if test -z "$repo_type"; then
         if ! test "$d" == "/"; then
             local parent_dir=$(dirname $(cd $d; /bin/pwd))
