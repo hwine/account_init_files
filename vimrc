@@ -14,13 +14,14 @@ Plugin 'gmarik/Vundle.vim'
 "
 "Bundle 'Rykka/riv.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'klen/python-mode'
+"Plugin 'klen/python-mode'
 "Bundle 'davidoc/taskpaper.vim'
 Plugin 'RST-Tables'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-scripts/vimwiki'
 Plugin 'chikamichi/mediawiki.vim.git'
 Plugin 'mileszs/ack.vim'
+Plugin 'will133/vim-dirdiff'
 
 " original repos on GitHub
 ""Bundle 'tpope/vim-fugitive'
@@ -201,4 +202,8 @@ set hidden
 " workaround for https://github.com/klen/python-mode/issues/342
 " plus mkdir ~/.ropeproject ; chmod $_ 0000
 let g:pymode_rope_lookup_project = 0
+" from :help DiffOrig (via
+" http://stackoverflow.com/questions/63104/smarter-vim-recovery#comment-33100858
+command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
+    \ | diffthis | wincmd p | diffthis
 " vim: set ft=vim :
