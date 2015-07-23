@@ -9,8 +9,8 @@ import logging
 import os
 import sh
 
-sftp = sh.sftp
-scp = sh.scp
+sftp = sh.sftp.bake('-p')
+scp = sh.scp.bake('-p')
 
 logger = logging.getLogger(__name__)
 logger = logging.getLogger(__name__)
