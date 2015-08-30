@@ -3,3 +3,4 @@
 *.py[oc]
 *.orig
 .ropeproject
+.python-version

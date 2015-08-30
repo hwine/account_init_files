@@ -6,3 +6,4 @@ syntax: glob
 *.py[co]
 .*.swp
 .ropeproject
+.python-version
