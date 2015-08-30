@@ -20,18 +20,21 @@ opts.sourcetreediff=
 [extensions]
 ;imerge=
 bookmarks=
+rebase=
 ;hgk=
 ;hgk=/Users/hwine/Library/Python/2.5/site-packages/mercurial-0.9.5-py2.5-macosx-10.3-fat.egg/hgext/hgk.py
 #hgext.convert=
 ;hgext.graphlog=
 ;graphviz = /Users/hwine/tmp/hg/playpen/graphviz.py
-hgext.mq=
 ;hgext.bookmarks =
 ;hggit = 
 #hgext.purge=
 ;bzexport = /Users/Hal/repos/bzexport/bzexport.py
 ;qimportbz = /Users/Hal/repos/qimportbz
 color =
+bundleclone = ~/.hgext/bundleclone.py
+record=
+histedit=
 
 [bookmarks]
 track.current = True
@@ -76,6 +79,5 @@ hg.mozilla.org = af:27:b9:34:47:4e:e5:98:01:f6:83:2b:51:c9:aa:d8:df:fb:1a:27
 ;bitbucket.org = 24:9c:45:8b:9c:aa:ba:55:4e:01:6d:58:ff:e4:28:7d:2a:14:ae:3b
 
 [alias]
-qstatus = qseries -v
 repository = path default
-s = !hg summary ; hg qstatus
+s = !hg summary 
