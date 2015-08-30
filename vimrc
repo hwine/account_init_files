@@ -22,6 +22,7 @@ Plugin 'vim-scripts/vimwiki'
 Plugin 'chikamichi/mediawiki.vim.git'
 Plugin 'mileszs/ack.vim'
 Plugin 'will133/vim-dirdiff'
+Plugin 'hrj/vim-DrawIt'
 
 " original repos on GitHub
 ""Bundle 'tpope/vim-fugitive'
