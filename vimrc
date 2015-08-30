@@ -23,6 +23,7 @@ Plugin 'chikamichi/mediawiki.vim.git'
 Plugin 'mileszs/ack.vim'
 Plugin 'will133/vim-dirdiff'
 Plugin 'hrj/vim-DrawIt'
+Plugin 'mattn/calendar-vim'
 
 " original repos on GitHub
 ""Bundle 'tpope/vim-fugitive'
