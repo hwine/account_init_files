@@ -31,6 +31,8 @@
         graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
         lol = log --graph --decorate --pretty=oneline --abbrev-commit
         ls = "!f () { set | grep GIT;} ; f"
+	s = !git branch && git status -s
+	attic = log --diff-filter=D --summary
 
 [push]
         default = current
