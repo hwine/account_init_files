@@ -204,6 +204,6 @@ set hidden
 let g:pymode_rope_lookup_project = 0
 " from :help DiffOrig (via
 " http://stackoverflow.com/questions/63104/smarter-vim-recovery#comment-33100858
-command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
+command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
     \ | diffthis | wincmd p | diffthis
 " vim: set ft=vim :

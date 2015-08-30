@@ -45,6 +45,7 @@ BIN_FILES = \
 	repo_type \
 	update-keepass-files \
 	hg-url \
+	vim-post-crash \
 
 
 # normal install consists of both scripts and rc files

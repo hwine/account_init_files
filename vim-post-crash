@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# script to go through all swp files after a system crash
+
+base_dir='/Users/hwine/gd/workwiki'
+
+function _get_original() {
+    local swap_name="$1"
+    local orig_name=${swap_name%.swp}
+    orig_name=${orig_name#.}
+    echo $orig_name
+}
+
+for f in $(find $base_dir -name .*.swp) ; do
+    f_path=$(dirname $f)
+    f_swp_base=$(basename $f)
+    f_main=$(_get_original $f_swp_base)
+    echo "Fixing $f_main"
+    vim $f_path/$f_main
+done
