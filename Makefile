@@ -19,7 +19,6 @@ DOT_FILES= \
 	gvimrc \
 	hgignore \
 	hgignore_global \
-	hgrc \
 	inputrc \
 	screenrc \
 	tmux.conf \
