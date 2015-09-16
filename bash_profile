@@ -63,3 +63,4 @@ if test "${OSTYPE}" != "${OSTYPE#darwin}" ; then
     function mdhere () { mdfind -onlyin . "$@" ; }
     export mdhere
 fi
+export GOPATH=$HOME/go
