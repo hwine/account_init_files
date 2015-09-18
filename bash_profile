@@ -55,9 +55,6 @@ fi
 [ -r ~/.bashrc ] && . ~/.bashrc
 
 export DOCKER_HOST=tcp://localhost:4244
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-source $(brew --prefix)/etc/bash_completion
 
 if test "${OSTYPE}" != "${OSTYPE#darwin}" ; then
     function mdhere () { mdfind -onlyin . "$@" ; }

@@ -40,3 +40,6 @@ if [ -r ~/tools/Mercurial/hgtab/hgtab-bash.sh ] ; then
 fi
 
 #PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+source $(brew --prefix)/etc/bash_completion
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
