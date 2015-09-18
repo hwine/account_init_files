@@ -45,6 +45,8 @@ BIN_FILES = \
 	update-keepass-files \
 	hg-url \
 	vim-post-crash \
+	tmux-start \
+	tmux-daemon-start \
 
 
 # normal install consists of both scripts and rc files
