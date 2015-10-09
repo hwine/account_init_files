@@ -2,7 +2,9 @@
 
 # script to go through all swp files after a system crash
 
-base_dir='/Users/hwine/gd/workwiki'
+base_dir=(
+    '/Users/hwine/gd/workwiki'
+    )
 
 function _get_original() {
     local swap_name="$1"
@@ -11,10 +13,22 @@ function _get_original() {
     echo $orig_name
 }
 
-for f in $(find $base_dir -name .*.swp) ; do
-    f_path=$(dirname $f)
-    f_swp_base=$(basename $f)
-    f_main=$(_get_original $f_swp_base)
-    echo "Fixing $f_main"
-    vim $f_path/$f_main
+function _process_dir() {
+    local dir="$1"
+    for f in $(find $dir -name \.\*.swp) ; do
+        local f_path=$(dirname $f)
+        local f_swp_base=$(basename $f)
+        local f_main=$(_get_original $f_swp_base)
+        echo "Fixing $f_main"
+        vim $f_path/$f_main
+    done
+}
+
+if test $# -eq 0; then
+    set "${base_dir[@]}"
+fi
+
+for dir; do
+    echo "Checking: $dir"
+    _process_dir "$dir"
 done
