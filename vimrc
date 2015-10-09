@@ -14,7 +14,7 @@ Plugin 'gmarik/Vundle.vim'
 "
 "Bundle 'Rykka/riv.vim'
 Plugin 'kien/ctrlp.vim'
-"Plugin 'klen/python-mode'
+Plugin 'klen/python-mode'
 "Bundle 'davidoc/taskpaper.vim'
 Plugin 'RST-Tables'
 Plugin 'kchmck/vim-coffee-script'
