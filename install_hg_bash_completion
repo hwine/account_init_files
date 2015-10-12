@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -eu
+
+hg_version=$(hg --version | grep version | sed 's,^.*(version ,,; s,).*,,')
+hg_base_url=https://selenic.com/hg/rawfile/${hg_version}/contrib/bash_completion
+
+tmp_file=/tmp/hg_completion.bash
+cur_file=/usr/local/etc/bash_completion.d/hg
+
+# Get requested version
+curl -o ${tmp_file} ${hg_base_url}
+
+# see if it is a change
+if cmp --quiet ${tmp_file} ${cur_file}; then
+    echo "Already set for ${hg_version}"
+else
+    mv ${tmp_file} ${cur_file}
+fi

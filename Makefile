@@ -47,6 +47,7 @@ BIN_FILES = \
 	vim-post-crash \
 	tmux-start \
 	tmux-daemon-start \
+	install_hg_bash_completion \
 
 
 # normal install consists of both scripts and rc files
