@@ -25,8 +25,10 @@ Plugin 'will133/vim-dirdiff'
 Plugin 'hrj/vim-DrawIt'
 Plugin 'mattn/calendar-vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-sleuth'
+Plugin 'bling/vim-airline'
+Plugin 'airblade/vim-gitgutter'
 
 " original repos on GitHub
 ""Bundle 'tpope/vim-fugitive'
