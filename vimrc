@@ -24,6 +24,9 @@ Plugin 'mileszs/ack.vim'
 Plugin 'will133/vim-dirdiff'
 Plugin 'hrj/vim-DrawIt'
 Plugin 'mattn/calendar-vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-sleuth'
 
 " original repos on GitHub
 ""Bundle 'tpope/vim-fugitive'
