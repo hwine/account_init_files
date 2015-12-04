@@ -5,27 +5,7 @@ if test $SHLVL -le 3; then
     IGNOREEOF=3
 fi
 
-## add X11 paths if xterm
-#case $TERM in
-#xterm)
-#    PATH=$PATH:/usr/X11R6/bin
-#    ;;
-#esac
-
 export PATH
-
-# the above path trick on Tiger ensures Terminal doesn't get X11 in
-# path, but we do want to use xterm-color (Terminal's default TERM) if
-# we are under X, so don't change until after the path manipulations
-test -n "$DISPLAY" && TERM=xterm-color || :
-
-# For Leopard 10.5.4, X & xterm are horribly broken, so have to use
-# terminal. However xterm-color is broken on terminal w.r.t. screen on
-# linux, so force to normal xterm. However, can no longer test $DISPLAY
-# to determine this, due to "launch X on demand" settings (it's always
-# set to a socket). This gets messy, so just default to xterm everywhere
-# for now (2008-08-03)
-TERM=xterm
 
 # homebrew
 if test -d /usr/local/bin ; then
