@@ -3,8 +3,9 @@
 set -u
 PATH=$PATH:/usr/local/bin
 
-ipynb_start=true
-docker_start=false
+# set defaults
+ipynb_start=${IPYNB_START:-true}
+docker_start=${DOCKER_START:-false}
 
 TMUX_SESSION=${TMUX_SESSION:-daemons}
 
@@ -23,8 +24,8 @@ function no_window() {
 tmux new-session -dP -s "${TMUX_SESSION}" &>/dev/null
 
 if $ipynb_start && no_window "ipython"; then
-    tmux new-window -n "ipython" 'cd ~/wip/ipynb; ipython notebook --no-browser '
+    tmux new-window -t "${TMUX_SESSION}" -n "ipython" 'cd ~/wip/ipynb; ipython notebook --no-browser '
 fi
-if $docker_start && no_window "boot2docker"; then
-    tmux new-window -n "boot2docker" 'boot2docker start ; exec bash'
+if $docker_start && no_window "docker"; then
+    tmux new-window -t "${TMUX_SESSION}" -n "docker" 'docker start ; exec bash'
 fi
