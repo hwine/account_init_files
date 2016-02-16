@@ -1,6 +1,6 @@
 export HISTCONTROL=ignoreboth
-if test $SHLVL -le 3; then
-    # 1 is first shell, 2 is first shell in screen, 3 is first shell in tmux
+if test $SHLVL -le 4; then
+    # 1 is first shell, 2 is first shell in screen, 4 is first shell in tmux
     # be sure not to export
     IGNOREEOF=3
 fi
