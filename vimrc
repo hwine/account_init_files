@@ -14,7 +14,7 @@ Plugin 'gmarik/Vundle.vim'
 "
 "Bundle 'Rykka/riv.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'klen/python-mode'
+"Plugin 'klen/python-mode'
 "Bundle 'davidoc/taskpaper.vim'
 "Plugin 'RST-Tables'
 Plugin 'kchmck/vim-coffee-script'
@@ -214,4 +214,22 @@ let g:pymode_rope_lookup_project = 0
 " http://stackoverflow.com/questions/63104/smarter-vim-recovery#comment-33100858
 command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
     \ | diffthis | wincmd p | diffthis
+
+" From http://unix.stackexchange.com/a/71631/150027
+if has("gui_running")
+    "echo "yes, we have a GUI"
+    set mouse=a
+else
+    "echo "Boring old console"
+    set mouse=
+endif
+
+" From
+" https://github.com/klen/python-mode/issues/342#issuecomment-167665367
+let g:pymode_rope_completion = 0
+let g:pymode_rope_complete_on_dot = 0
+
+" From http://calebthompson.io/crontab-and-vim-sitting-in-a-tree/
+" allow edit of crontab on osx
+autocmd filetype crontab setlocal nobackup nowritebackup
 " vim: set ft=vim :
