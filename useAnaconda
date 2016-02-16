@@ -1,0 +1,7 @@
+# source to use anaconda
+
+# added by Anaconda2 2.5.0 installer
+# NOTE: this overrides any pyenv settings.
+if test -d $HOME/anaconda; then
+    export PATH="$HOME/anaconda/bin:$PATH"
+fi

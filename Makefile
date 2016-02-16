@@ -48,6 +48,8 @@ BIN_FILES = \
 	tmux-start \
 	tmux-daemon-start \
 	install_hg_bash_completion \
+	useAWS \
+	useAnaconda \
 
 
 # normal install consists of both scripts and rc files
