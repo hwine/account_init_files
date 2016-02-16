@@ -10,6 +10,11 @@ docker_start=${DOCKER_START:-false}
 TMUX_SESSION=${TMUX_SESSION:-daemons}
 
 # set up tmux session with "daemons"
+# but if at reboot (no tty), wait 10 seconds - it seems to get created,
+# then killed
+if ! tty -s ; then
+    sleep 10
+fi
 
 function no_window() {
     local window="$1"
@@ -21,10 +26,11 @@ function no_window() {
     return $?
 }
 
-tmux new-session -dP -s "${TMUX_SESSION}" &>/dev/null
+tmux new-session -c /tmp/ -P -d -s "${TMUX_SESSION}" || true
 
-if $ipynb_start && no_window "ipython"; then
-    tmux new-window -t "${TMUX_SESSION}" -n "ipython" 'cd ~/wip/ipynb; ipython notebook --no-browser '
+if $ipynb_start && no_window "jupyter"; then
+    test -r ~/bin/useAnaconda && source ~/bin/useAnaconda
+    tmux new-window -t "${TMUX_SESSION}" -n "jupyter" 'cd ~/wip/ipynb; jupyter notebook --no-browser '
 fi
 if $docker_start && no_window "docker"; then
     tmux new-window -t "${TMUX_SESSION}" -n "docker" 'docker start ; exec bash'

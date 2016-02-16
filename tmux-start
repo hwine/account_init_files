@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/bash 
 export PATH=$PATH:/usr/local/bin
 #echo "$$ $PPID"
 #ps lwwwwp $$,$PPID
@@ -22,14 +22,14 @@ do
     case $opt in
         "NEW SESSION")
             read -p "Enter new session name: " SESSION_NAME
-            tmux new -s "$SESSION_NAME"
+            exec tmux new -s "$SESSION_NAME"
             break
             ;;
         "BASH")
             bash --login
             break;;
         *) 
-            tmux attach-session -t $opt 
+            exec tmux attach-session -t $opt 
             break
             ;; 
     esac
