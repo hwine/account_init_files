@@ -32,8 +32,8 @@ get_repo_type() {
     fi
     if test -z "$repo_type"; then
         if ! test "$d" == "/"; then
-            local parent_dir=$(dirname $(cd $d; /bin/pwd))
-            repo_type=$(get_repo_type $parent_dir)
+            local parent_dir=$(dirname "$(cd "$d"; /bin/pwd)")
+            repo_type=$(get_repo_type "$parent_dir")
         else
             repo_type="(not a repo)"
         fi
@@ -42,6 +42,6 @@ get_repo_type() {
 }
 
 for d; do
-    repo_type=$(get_repo_type $d)
+    repo_type=$(get_repo_type "$d")
     echo "$d is $repo_type"
 done
