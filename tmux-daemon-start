@@ -26,7 +26,7 @@ function no_window() {
     return $?
 }
 
-tmux new-session -c /tmp/ -P -d -s "${TMUX_SESSION}" || true
+tmux new-session -c /tmp/ -P -d -s "${TMUX_SESSION}" &>/dev/null || true
 
 if $ipynb_start && no_window "jupyter"; then
     test -r ~/bin/useAnaconda && source ~/bin/useAnaconda
