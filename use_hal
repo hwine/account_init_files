@@ -1,0 +1,15 @@
+[[ -z ${BASH_SOURCE[0]} ]] && { echo "must source this file" ; exit 1; }
+me=${BASH_SOURCE[0]}
+mydir=$(cd $(dirname "$me"); /bin/pwd)
+
+export VIMINIT="source $mydir/vimrc"
+export INPUTRC=$mydir/inputrc
+export SCREENRC=$mydir/screenrc
+
+#set | grep use_hal
+#set | grep hal_rc
+
+set -o vi
+
+# exec bash to pick up INPUTRC values on bash command line
+exec bash 
