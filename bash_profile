@@ -7,34 +7,26 @@ fi
 
 export PATH
 
+update_path() {
+    if test -d "$1" ; then
+        case ":$PATH:" in
+        *:$1:*) ;; # already in
+        *) export PATH="$1:$PATH" ;;
+        esac
+    fi
+}
 # homebrew
-if test -d /usr/local/bin ; then
-    case ":$PATH:" in
-    *:/usr/local/bin:*) ;; # already in
-    *) export PATH=/usr/local/bin:$PATH ;;
-    esac
-fi
+update_path /usr/local/bin
 
-if test -d $HOME/bin ; then
-    case ":$PATH:" in
-    *:$HOME/bin:*) ;; # already in
-    *) export PATH=$HOME/bin:$PATH ;;
-    esac
-fi
-# In case machine has macports installed
-# note that macports _does_ need to go first, or inconsistencies arise
-if test -d /opt/local/bin ; then
-    case ":$PATH:" in
-    *:/opt/local/bin:*) ;; # already in
-    *) export PATH=/opt/local/bin:/opt/local/sbin:$PATH ;;
-    esac
-fi
+# new "standard"
+update_path "$HOME/.local/bin"
+
+# my stuff
+update_path $HOME/bin 
 
 # wait to do this until path is set
 #[ -r /etc/profile ] && . /etc/profile
 [ -r ~/.bashrc ] && . ~/.bashrc
-
-export DOCKER_HOST=tcp://localhost:4244
 
 if test "${OSTYPE}" != "${OSTYPE#darwin}" ; then
     function mdhere () { mdfind -onlyin . "$@" ; }
