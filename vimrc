@@ -32,6 +32,7 @@ Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'chase/vim-ansible-yaml'
+Plugin 'rhysd/committia.vim'
 
 " original repos on GitHub
 ""Bundle 'tpope/vim-fugitive'
@@ -234,4 +235,9 @@ let g:pymode_rope_complete_on_dot = 0
 " From http://calebthompson.io/crontab-and-vim-sitting-in-a-tree/
 " allow edit of crontab on osx
 autocmd filetype crontab setlocal nobackup nowritebackup
+
+" From https://web-design-weekly.com/2013/09/01/a-better-git-commit/
+" Improve handling of git commit messages
+autocmd Filetype gitcommit spell textwidth=72
+
 " vim: set ft=vim :
