@@ -1,38 +1,38 @@
 " Vundle setup
 if isdirectory($HOME . "/.vim")
-set nocompatible              " be iMproved
-filetype off                  " required!
+call plug#begin('~/.vim/bundle')
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle
-" required! 
-Plugin 'gmarik/Vundle.vim'
+" Helper functions
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !./install.sh
+  endif
+endfunction
 
 " My plugins here:
 "
 "Bundle 'Rykka/riv.vim'
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 "Plugin 'klen/python-mode'
 "Bundle 'davidoc/taskpaper.vim'
 "Plugin 'RST-Tables'
-Plugin 'Shutnik/jshint2.vim'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'vim-scripts/vimwiki'
-Plugin 'chikamichi/mediawiki.vim.git'
-Plugin 'mileszs/ack.vim'
-Plugin 'will133/vim-dirdiff'
-Plugin 'hrj/vim-DrawIt'
-Plugin 'mattn/calendar-vim'
-Plugin 'scrooloose/nerdtree'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'tpope/vim-sleuth'
-Plugin 'bling/vim-airline'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
-Plugin 'chase/vim-ansible-yaml'
-Plugin 'rhysd/committia.vim'
+Plug 'Shutnik/jshint2.vim'
+Plug 'kchmck/vim-coffee-script'
+Plug 'vim-scripts/vimwiki'
+Plug 'chikamichi/mediawiki.vim'
+Plug 'mileszs/ack.vim'
+Plug 'will133/vim-dirdiff'
+Plug 'hrj/vim-DrawIt'
+Plug 'mattn/calendar-vim'
+Plug 'scrooloose/nerdtree'
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+Plug 'tpope/vim-sleuth'
+Plug 'bling/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'chase/vim-ansible-yaml'
+Plug 'rhysd/committia.vim'
+Plug 'elmcast/elm-vim'
 
 " original repos on GitHub
 ""Bundle 'tpope/vim-fugitive'
@@ -47,17 +47,11 @@ Plugin 'rhysd/committia.vim'
 """ Git repos on your local machine (i.e. when working on your own plugin)
 ""Bundle 'file:///Users/gmarik/path/to/plugin'
 """ ...
-call vundle#end()
+"""call vundle#end()
+call plug#end()
+
 
 "
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install (update) bundles
-" :BundleSearch(!) foo - search (or refresh cache first) for foo
-" :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle commands are not allowed (on same line)
 endif
 
 filetype plugin indent on
