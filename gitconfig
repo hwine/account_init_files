@@ -4,7 +4,7 @@
 [core]
         excludesfile = ~/.gitignore_global
         whitespace = trailing-space,space-before-tab,tab-in-indent
-        editor = vim
+	editor = nvim
 [difftool "sourcetree"]
         cmd = opendiff \"$LOCAL\" \"$REMOTE\"
         path = 
@@ -29,9 +29,10 @@
         trustExitCode = true
 [alias]
         graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
+        glog = graph
         lol = log --graph --decorate --pretty=oneline --abbrev-commit
         ls = "!f () { set | grep GIT;} ; f"
-        s = status --short --branch
+        s = status --short --branch --untracked-files=no
         attic = log --diff-filter=D --summary
         # aliases from
         # http://stackoverflow.com/questions/1527234/finding-a-branch-point-with-git

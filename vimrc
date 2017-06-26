@@ -1,19 +1,22 @@
-" Vundle setup
+" Plug setup
 if isdirectory($HOME . "/.vim")
 call plug#begin('~/.vim/bundle')
 
-" Helper functions
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    !./install.sh
-  endif
-endfunction
+" vim-plug helper functions and settings
+""" let g:ycm_server_python_interpreter = '/Users/hwine/.pyenv/versions/2.7.12/bin/python2'
+""" function! BuildYCM(info)
+"""   if a:info.status == 'installed' || a:info.force
+"""     !./install.sh
+"""   endif
+""" endfunction
 
 " My plugins here:
 "
-"Bundle 'Rykka/riv.vim'
+Plug 'Rykka/riv.vim'
+Plug 'Rykka/InstantRst'
 Plug 'kien/ctrlp.vim'
-"Plugin 'klen/python-mode'
+Plug 'klen/python-mode'
+Plug 'christoomey/vim-tmux-navigator'
 "Bundle 'davidoc/taskpaper.vim'
 "Plugin 'RST-Tables'
 Plug 'Shutnik/jshint2.vim'
@@ -25,7 +28,8 @@ Plug 'will133/vim-dirdiff'
 Plug 'hrj/vim-DrawIt'
 Plug 'mattn/calendar-vim'
 Plug 'scrooloose/nerdtree'
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+"Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+"Plug 'floobits/floobits-neovim'
 Plug 'tpope/vim-sleuth'
 Plug 'bling/vim-airline'
 Plug 'airblade/vim-gitgutter'
@@ -33,6 +37,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'chase/vim-ansible-yaml'
 Plug 'rhysd/committia.vim'
 Plug 'elmcast/elm-vim'
+Plug 'editorconfig/editorconfig-vim'
 
 " original repos on GitHub
 ""Bundle 'tpope/vim-fugitive'
@@ -232,6 +237,39 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 
 " From https://web-design-weekly.com/2013/09/01/a-better-git-commit/
 " Improve handling of git commit messages
-autocmd Filetype gitcommit spell textwidth=72
+" Now done via Plug 'rhysd/committia.vim'
+" autocmd Filetype gitcommit spell textwidth=72
 
+"let &t_Co=256
+colorscheme default
+
+" support for neovim
+let g:python3_host_prog = "/Users/hwine/.pyenv/versions/neovim.py3/bin/python"
+let g:python_host_prog = "/Users/hwine/.pyenv/versions/neovim.py2/bin/python"
+
+" elm_format support
+let g:elm_format_autosave = 1
+
+" support for 'rg' if available
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
+" Ideas from ulfr
+" "Languages that use spaces, not tabs
+" autocmd FileType js     :setlocal sw=4 ts=4 sts=4 expandtab
+" autocmd FileType lua    :setlocal sw=2 ts=2 sts=2 expandtab
+" autocmd FileType python :setlocal sw=4 ts=4 sts=4 expandtab
+" autocmd FileType yaml   :setlocal sw=4 ts=4 sts=4 expandtab
+" autocmd FileType pp     :setlocal sw=4 ts=4 sts=4 expandtab
+" "Languages that use tabs, not spaces
+" autocmd FileType php    :setlocal sw=3 ts=3 sts=3 noexpandtab
+" autocmd FileType c      :setlocal sw=6 ts=6 sts=6 noexpandtab
+" autocmd FileType cpp    :setlocal sw=4 ts=4 sts=4 noexpandtab
+" autocmd FileType rst    :setlocal sw=4 ts=4 sts=4 noexpandtab wrap textwidth=80
+" autocmd FileType go     :setlocal sw=6 ts=6 sts=6 noexpandtab
+" autocmd FileType go     call tagbar#autoopen(0)
+" autocmd FileType mediawiki  :setlocal sw=4 ts=4 sts=4 noexpandtab wrap linebreak textwidth=120
+" autocmd FileType markdown   :setlocal sw=4 ts=4 sts=4 wrap linebreak textwidth=80
 " vim: set ft=vim :

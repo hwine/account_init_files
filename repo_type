@@ -30,7 +30,9 @@ get_repo_type() {
     if test -d "$d/.svn" ; then
         repo_type="$repo_type svn ($(svn info $d | awk '/^Repository Root:/ {print $3}'))"
     fi
+    # No repo found yet, move up to parent directory
     if test -z "$repo_type"; then
+        # better test might be if parent is writeable by user
         if ! test "$d" == "/"; then
             local parent_dir=$(dirname "$(cd "$d"; /bin/pwd)")
             repo_type=$(get_repo_type "$parent_dir")

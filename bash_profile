@@ -24,12 +24,24 @@ update_path "$HOME/.local/bin"
 # my stuff
 update_path $HOME/bin 
 
-# wait to do this until path is set
-#[ -r /etc/profile ] && . /etc/profile
-[ -r ~/.bashrc ] && . ~/.bashrc
-
 if test "${OSTYPE}" != "${OSTYPE#darwin}" ; then
     function mdhere () { mdfind -onlyin . "$@" ; }
     export mdhere
 fi
 export GOPATH=$HOME/go
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# wait to do this until path is set
+#[ -r /etc/profile ] && . /etc/profile
+[ -r ~/.bashrc ] && . ~/.bashrc
+if [ -r "/usr/local/opt/nvm/nvm.sh" -a -z "$NVM_DIR" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    . "/usr/local/opt/nvm/nvm.sh"
+fi
+
+# ensure all AWS usage is explict
+export AWS_DEFAULT_PROFILE=no_such_profile
+# FoxOps tooling
+## [[ -r ~/.mfa.sh ]] && source ~/.mfa.sh
+## export -f switch _switch

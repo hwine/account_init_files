@@ -1,6 +1,13 @@
 # Settings for my machine (glob format)
 .*.swp
-*.py[oc]
+*.py[ocd]
+*.whl
 *.orig
 .ropeproject
 .python-version
+# My convention
+hwine_notes/
+# for Floobits.com
+.floo
+.flooignore
+.DS_Store

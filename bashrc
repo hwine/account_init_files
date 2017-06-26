@@ -2,7 +2,8 @@ set -o vi
 
 export MOZ_USER=${MOZ_USER:-hwine}
 export PASTEBIN_NAME=${PASTEBIN_NAME:-hwine}
-export VISUAL=vim
+export VISUAL=nvim
+export EDITOR=nvim
 
 alias ll=ls\ -lFG
 alias ls=ls\ -FG
@@ -17,6 +18,8 @@ if type -p lesspipe.sh &>/dev/null ; then
     export LESSOPEN="|lesspipe.sh %s"
 fi
 
+function tmux() { export TERM=screen-256color-bce ; command tmux "$@" ; }
+export -f tmux
 function jsonlint() { python -c "import json; json.load(open('$1'))"; }
 function lf(){ \ls -t | head -1 ;}
 function host ()
@@ -37,7 +40,11 @@ ssh-remove-host() {
 
 [ -r ~/bin/rprompt ] && PROMPT_COMMAND='source ~/bin/rprompt'
 
-if [ -r ~/bin/virtualenvwrapper.sh ] ; then
+# switching to using `pew` as the accessor, for the pyenv managed
+# versions DANGER DANGER
+if [[ -x ~/.local/bin/pew ]] ; then
+    export WORKON_HOME=$HOME/.pyenv/versions
+elif [ -r ~/bin/virtualenvwrapper.sh ] ; then
     export WORKON_HOME=$HOME/.virtualenvs
     source ~/bin/virtualenvwrapper.sh
 elif [ -r ~/bin/virtualenvwrapper_bashrc ] ; then
@@ -60,3 +67,27 @@ eval "$(pyenv virtualenv-init -)"
 # to avoid "about to be deprecated" message when activating venv
 # actually, keep for now, need to rewrite prompt functions first
 export PYENV_VIRTUALENV_DISABLE_PROMPT=0
+
+# pip bash completion start
+_pip_completion()
+{
+    COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \
+                   COMP_CWORD=$COMP_CWORD \
+                   PIP_AUTO_COMPLETE=1 $1 ) )
+}
+complete -o default -F _pip_completion pip
+# pip bash completion end
+
+# pipenv & pew bash completion start
+source $(pew shell_config)
+ #eval $(env _PIPENV_COMPLETE=source-bash pipenv)
+_pipenv_completion() {
+    local IFS=$'\t'
+    COMPREPLY=( $( env COMP_WORDS="${COMP_WORDS[*]}" \
+                   COMP_CWORD=$COMP_CWORD \
+                   _PIPENV_COMPLETE=complete-bash $1 ) )
+    return 0
+}
+
+complete -F _pipenv_completion -o default pipenv
+# pipenv & pew bash completion end
