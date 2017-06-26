@@ -39,7 +39,6 @@ BIN_FILES = \
 	hg-url \
 	install_hg_bash_completion \
 	myscreen \
-	q \
 	repo_type \
 	rprompt \
 	sourceAuthSocket \
@@ -59,12 +58,6 @@ install: bin_files dot_files # $(MISC_TARGETS)
 ack:
 	# stay with 1.x as we don't like loss of -a option
 	curl http://beyondgrep.com/ack-1.96-single-file > $@
-	chmod 0755 $@
-
-q:
-	# sql queries of csv files - may be useful
-	# now handled by brew, but leaving here for non-darwin
-	curl https://cdn.rawgit.com/harelba/q/1.5.0/bin/q > $@
 	chmod 0755 $@
 
 vimack: ack
