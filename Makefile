@@ -33,23 +33,24 @@ MISC_TARGETS= \
 
 # my scripts
 BIN_FILES = \
+	ack \
+	clean-docker-for-mac.sh \
 	git-diff-driver \
+	hg-url \
+	install_hg_bash_completion \
+	jq \
 	myscreen \
+	q \
+	repo_type \
 	rprompt \
 	sourceAuthSocket \
-	ack \
-	q \
-	jq \
-	tp-due \
-	repo_type \
-	update-keepass-files \
-	hg-url \
-	vim-post-crash \
-	tmux-start \
 	tmux-daemon-start \
-	install_hg_bash_completion \
+	tmux-start \
+	tp-due \
+	update-keepass-files \
 	useAWS \
 	useAnaconda \
+	vim-post-crash \
 
 
 # normal install consists of both scripts and rc files
