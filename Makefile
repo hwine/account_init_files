@@ -38,7 +38,6 @@ BIN_FILES = \
 	git-diff-driver \
 	hg-url \
 	install_hg_bash_completion \
-	jq \
 	myscreen \
 	q \
 	repo_type \
@@ -66,11 +65,6 @@ q:
 	# sql queries of csv files - may be useful
 	# now handled by brew, but leaving here for non-darwin
 	curl https://cdn.rawgit.com/harelba/q/1.5.0/bin/q > $@
-	chmod 0755 $@
-
-jq:
-	# may be useful
-	curl http://stedolan.github.io/jq/download/osx64/jq > $@
 	chmod 0755 $@
 
 vimack: ack
