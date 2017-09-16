@@ -42,31 +42,23 @@ ssh-remove-host() {
 
 # switching to using `pew` as the accessor, for the pyenv managed
 # versions DANGER DANGER
-if [[ -x ~/.local/bin/pew ]] ; then
-    export WORKON_HOME=$HOME/.pyenv/versions
-elif [ -r ~/bin/virtualenvwrapper.sh ] ; then
-    export WORKON_HOME=$HOME/.virtualenvs
-    source ~/bin/virtualenvwrapper.sh
-elif [ -r ~/bin/virtualenvwrapper_bashrc ] ; then
-    export WORKON_HOME=$HOME/.virtualenvs
-    source ~/bin/virtualenvwrapper_bashrc
-fi
+# Switch to use approach from
+#   https://medium.com/@henriquebastos/the-definitive-guide-to-setup-my-python-workspace-628d68552e14
+export WORKON_HOME=~/.virtualenvs
+export PROJECT_HOME=~/repos
+eval "$(pyenv init -)"
+pyenv virtualenvwrapper_lazy
 
-if [ -r ~/bin/na.sh ] ; then
-    # from https://github.com/ttscoff/na
-    source ~/bin/na.sh
-fi
 
 if [ -r ~/tools/Mercurial/hgtab/hgtab-bash.sh ] ; then
     source ~/tools/Mercurial/hgtab/hgtab-bash.sh
 fi
 
 source $(brew --prefix)/etc/bash_completion
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 # to avoid "about to be deprecated" message when activating venv
 # actually, keep for now, need to rewrite prompt functions first
 export PYENV_VIRTUALENV_DISABLE_PROMPT=0
+export PIP_REQUIRE_VIRTUALENV=true
 
 # pip bash completion start
 _pip_completion()

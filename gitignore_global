@@ -5,8 +5,9 @@
 *.orig
 .ropeproject
 .python-version
-# My convention
+# My convention - one way or the other
 hwine_notes/
+notes_hwine/
 # for Floobits.com
 .floo
 .flooignore

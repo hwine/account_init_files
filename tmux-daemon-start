@@ -29,7 +29,7 @@ function no_window() {
 tmux new-session -c /tmp/ -P -d -s "${TMUX_SESSION}" &>/dev/null || true
 
 if $ipynb_start && no_window "jupyter"; then
-    test -r ~/bin/useAnaconda && source ~/bin/useAnaconda
+    # test -r ~/bin/useAnaconda && source ~/bin/useAnaconda
     tmux new-window -t "${TMUX_SESSION}" -n "jupyter" 'cd ~/wip/ipynb; jupyter notebook --no-browser '
 fi
 if $docker_start && no_window "docker"; then

@@ -2,35 +2,37 @@
 if isdirectory($HOME . "/.vim")
 call plug#begin('~/.vim/bundle')
 
-" vim-plug helper functions and settings
-""" let g:ycm_server_python_interpreter = '/Users/hwine/.pyenv/versions/2.7.12/bin/python2'
-""" function! BuildYCM(info)
-"""   if a:info.status == 'installed' || a:info.force
-"""     !./install.sh
-"""   endif
-""" endfunction
+"""" vim-plug helper functions and settings
+"""let g:ycm_server_python_interpreter = '/Users/hwine/.pyenv/versions/2.7.12/bin/python2'
+"""function! BuildYCM(info)
+"""  if a:info.status == 'installed' || a:info.force
+"""    !./install.sh
+"""  endif
+"""endfunction
 
 " My plugins here:
 "
 Plug 'Rykka/riv.vim'
-Plug 'Rykka/InstantRst'
+"Plug 'Rykka/InstantRst'
 Plug 'kien/ctrlp.vim'
+Plug 'davidhalter/jedi-vim'
 Plug 'klen/python-mode'
 Plug 'christoomey/vim-tmux-navigator'
 "Bundle 'davidoc/taskpaper.vim'
 "Plugin 'RST-Tables'
 Plug 'Shutnik/jshint2.vim'
 Plug 'kchmck/vim-coffee-script'
-Plug 'vim-scripts/vimwiki'
+" Plug 'vim-scripts/vimwiki'  " using RiV now
 Plug 'chikamichi/mediawiki.vim'
 Plug 'mileszs/ack.vim'
 Plug 'will133/vim-dirdiff'
 Plug 'hrj/vim-DrawIt'
 Plug 'mattn/calendar-vim'
 Plug 'scrooloose/nerdtree'
-"Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+"""Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 "Plug 'floobits/floobits-neovim'
 Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
 Plug 'bling/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -38,6 +40,7 @@ Plug 'chase/vim-ansible-yaml'
 Plug 'rhysd/committia.vim'
 Plug 'elmcast/elm-vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'kannokanno/previm'
 
 " original repos on GitHub
 ""Bundle 'tpope/vim-fugitive'
@@ -193,8 +196,23 @@ filetype plugin indent on
 " from kovidgoyal http://www.mobileread.com/forums/showthread.php?t=103114
 au BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
 
+" Don't autofold python
+let g:pymode_folding = 0
 " test of pylint
-let g:pymode_lint_checker = "pyflakes,pylint,pep8" 
+let g:pymode_lint_checker = "pyflakes,pylint,pep8"  " not working with
+" latest pymode
+" let g:pymode_lint_checker = "pyflakes,pep8" 
+" turn the darn thing off (rope refactoring, with .ropeproject
+" directories)
+let g:pymode_rope = 0
+" workaround for https://github.com/klen/python-mode/issues/342
+" plus mkdir ~/.ropeproject ; chmod $_ 0000
+let g:pymode_rope_lookup_project = 0
+" From
+" https://github.com/klen/python-mode/issues/342#issuecomment-167665367
+let g:pymode_rope_completion = 0
+let g:pymode_rope_complete_on_dot = 0
+
 
 " from learning vimscript the hard way  
 set shiftround  " < & > always work with multiples of sw
@@ -209,9 +227,6 @@ set shiftround  " < & > always work with multiples of sw
 set fileformats="unix,dos"
 
 set hidden
-" workaround for https://github.com/klen/python-mode/issues/342
-" plus mkdir ~/.ropeproject ; chmod $_ 0000
-let g:pymode_rope_lookup_project = 0
 " from :help DiffOrig (via
 " http://stackoverflow.com/questions/63104/smarter-vim-recovery#comment-33100858
 command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
@@ -226,11 +241,6 @@ else
     set mouse=
 endif
 
-" From
-" https://github.com/klen/python-mode/issues/342#issuecomment-167665367
-let g:pymode_rope_completion = 0
-let g:pymode_rope_complete_on_dot = 0
-
 " From http://calebthompson.io/crontab-and-vim-sitting-in-a-tree/
 " allow edit of crontab on osx
 autocmd filetype crontab setlocal nobackup nowritebackup
@@ -243,10 +253,6 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 "let &t_Co=256
 colorscheme default
 
-" support for neovim
-let g:python3_host_prog = "/Users/hwine/.pyenv/versions/neovim.py3/bin/python"
-let g:python_host_prog = "/Users/hwine/.pyenv/versions/neovim.py2/bin/python"
-
 " elm_format support
 let g:elm_format_autosave = 1
 
@@ -255,6 +261,27 @@ if executable("rg")
     set grepprg=rg\ --vimgrep\ --no-heading
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
+
+" RiV Settings
+" use sphinx style local links: :doc: & :download:
+let g:riv_file_link_style=2
+" set up projects
+let p1 = { 'Name': 'SecOps', 'path': '~/wip/foxsec', }
+let p2 = { 'Name': 'Geolocation API Key', 'path': '~/wip/projects',}
+let p3 = { 'Name': 'My Note', 'path': '~/Documents/Riv', }
+let g:riv_projects = [p1, p2, p3]
+" Don't fold small chunks - more annoying in Riv
+set foldminlines=10
+
+" Previm settings
+" Required setting to open files
+let g:previm_open_cmd='open '
+" 1=realtime; 0=on save only
+let g:previm_enable_realtime = 1
+" disable CSS
+let g:previm_disable_default_css = 1
+" show header with timestamp
+let g:previm_show_header = 1
 
 " Ideas from ulfr
 " "Languages that use spaces, not tabs
