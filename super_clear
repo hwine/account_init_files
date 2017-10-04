@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# clear as much screen stuff as we can
+
+clear  # the tty
+if [[ $TMUX ]]; then
+    tmux clear-history
+fi

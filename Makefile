@@ -42,6 +42,7 @@ BIN_FILES = \
 	repo_type \
 	rprompt \
 	sourceAuthSocket \
+	super_clear \
 	tmux-daemon-start \
 	tmux-start \
 	tp-due \
