@@ -1,9 +1,17 @@
 #!/bin/bash
 echo -ne "\\033]0;${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\\007"
+## useful if doing GTD
+## if $(${TASK_PROMPT:-false}) && $(which task &>/dev/null); then
+##     TASK="=>$(task +in +PENDING count)<= "
+## else
+##     TASK=
+## fi
 if [ -f CVS/Tag ]; then
-    PS1=$'$? [\\u@\\h \\W '$(cut -c 2- CVS/Tag)${VIRTUAL_ENV:+ (${VIRTUAL_ENV##*/})}']\n\$ '
+    PS1=$'$? ['$TASK$'\\u@\\h \\W '$(cut -c 2- CVS/Tag)${VIRTUAL_ENV:+ (${VIRTUAL_ENV##*/})}']\n\$ '
 elif [ -d CVS ]; then
-    PS1=$'$? [\\u@\\h \\W main-trunk'${VIRTUAL_ENV:+ (${VIRTUAL_ENV##*/})}']\n\$ '
+    PS1=$'$? ['$TASK$'\\u@\\h \\W main-trunk'${VIRTUAL_ENV:+ (${VIRTUAL_ENV##*/})}']\n\$ '
 else
-    PS1=$'$? [\\u@\\h \\W'${VIRTUAL_ENV:+ (${VIRTUAL_ENV##*/})}']\n\$ '
+    PS1=$'$? ['$TASK$'\\u@\\h \\W'${VIRTUAL_ENV:+ (${VIRTUAL_ENV##*/})}']\n\$ '
 fi
+#echo ":$PS1:$TASK:"
+## unset TASK
