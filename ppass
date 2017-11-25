@@ -1,0 +1,27 @@
+#!/bin/bash
+if [[ -n $BASH_VERSION ]] && [[ "$(basename "$0" 2> /dev/null)" == "ppass" ]]; then
+    >&2 echo "Error: ppass must be sourced. Run
+    source $0
+instead of
+    $0
+"
+    exit 1
+fi
+
+function ppass() {
+    local PASSWORD_STORE_KEY PASSWORD_STORE_DIR
+    export PASSWORD_STORE_DIR=$HOME/.personal_pass/
+    export PASSWORD_STORE_KEY=0x974b7b33
+    pass "$@"
+}
+
+export -f ppass
+
+function _ppass_complete() {
+    local PASSWORD_STORE_DIR
+    export PASSWORD_STORE_DIR=$HOME/.personal_pass/
+    _pass "$@"
+}
+
+complete -o filenames -o nospace -F _ppass_complete ppass
+

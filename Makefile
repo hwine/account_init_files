@@ -23,7 +23,6 @@ DOT_FILES= \
 	screenrc \
 	tmux.conf \
 	vimrc \
-	xinitrc \
 
 # other targets that install things similar to dotfiles
 MISC_TARGETS= \
@@ -39,6 +38,7 @@ BIN_FILES = \
 	hg-url \
 	install_hg_bash_completion \
 	myscreen \
+	ppass \
 	repo_type \
 	rprompt \
 	sourceAuthSocket \
@@ -46,7 +46,6 @@ BIN_FILES = \
 	tmux-daemon-start \
 	tmux-start \
 	tp-due \
-	update-keepass-files \
 	useAWS \
 	useAnaconda \
 	vim-post-crash \
