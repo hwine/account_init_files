@@ -47,7 +47,7 @@ ssh-remove-host() {
 export WORKON_HOME=~/.virtualenvs
 export PROJECT_HOME=~/repos
 eval "$(pyenv init -)"
-pyenv virtualenvwrapper_lazy
+# pyenv virtualenvwrapper_lazy
 
 
 if [ -r ~/tools/Mercurial/hgtab/hgtab-bash.sh ] ; then
@@ -83,3 +83,8 @@ _pipenv_completion() {
 
 complete -F _pipenv_completion -o default pipenv
 # pipenv & pew bash completion end
+
+# Misc local files
+for f in ~/.local/etc/profile.d/*; do
+    source $f
+done
