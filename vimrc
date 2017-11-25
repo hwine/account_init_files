@@ -1,65 +1,76 @@
 " Plug setup
 if isdirectory($HOME . "/.vim")
-call plug#begin('~/.vim/bundle')
+    " For a paranoia.
+    " Normally `:set nocp` is not needed, because it is done automatically
+    " when .vimrc is found.
+    if &compatible
+        " `:set nocp` has many side effects. Therefore this should be done
+        " only when 'compatible' is set.
+        set nocompatible
+    endif
 
-"""" vim-plug helper functions and settings
-"""let g:ycm_server_python_interpreter = '/Users/hwine/.pyenv/versions/2.7.12/bin/python2'
-"""function! BuildYCM(info)
-"""  if a:info.status == 'installed' || a:info.force
-"""    !./install.sh
-"""  endif
-"""endfunction
+    " just one set of packages, for vim8 & neovim
+    set packpath^=~/.vim
 
-" My plugins here:
-"
-Plug 'Rykka/riv.vim'
-"Plug 'Rykka/InstantRst'
-Plug 'kien/ctrlp.vim'
-Plug 'davidhalter/jedi-vim'
-Plug 'klen/python-mode'
-Plug 'christoomey/vim-tmux-navigator'
-"Bundle 'davidoc/taskpaper.vim'
-"Plugin 'RST-Tables'
-Plug 'Shutnik/jshint2.vim'
-Plug 'kchmck/vim-coffee-script'
-" Plug 'vim-scripts/vimwiki'  " using RiV now
-Plug 'chikamichi/mediawiki.vim'
-Plug 'mileszs/ack.vim'
-Plug 'will133/vim-dirdiff'
-Plug 'hrj/vim-DrawIt'
-Plug 'mattn/calendar-vim'
-Plug 'scrooloose/nerdtree'
-"""Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-"Plug 'floobits/floobits-neovim'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-surround'
-Plug 'bling/vim-airline'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'chase/vim-ansible-yaml'
-Plug 'rhysd/committia.vim'
-Plug 'elmcast/elm-vim'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'kannokanno/previm'
+    " only load minpac if we have packaging work to do. See commands below
+    if exists('*minpac#init')
+        " minpac is loaded.
+        call minpac#init()
+        call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-" original repos on GitHub
-""Bundle 'tpope/vim-fugitive'
-""Bundle 'Lokaltog/vim-easymotion'
-""Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-""Bundle 'tpope/vim-rails.git'
-" vim-scripts repos
-""Bundle 'L9'
-""Bundle 'FuzzyFinder'
-" non-GitHub repos
-""Bundle 'git://git.wincent.com/command-t.git'
-""" Git repos on your local machine (i.e. when working on your own plugin)
-""Bundle 'file:///Users/gmarik/path/to/plugin'
-""" ...
-"""call vundle#end()
-call plug#end()
+        """" vim-plug helper functions and settings
+        """let g:ycm_server_python_interpreter = '/Users/hwine/.pyenv/versions/2.7.12/bin/python2'
+        """function! BuildYCM(info)
+        """  if a:info.status == 'installed' || a:info.force
+        """    !./install.sh
+        """  endif
+        """endfunction
 
+        " My plugins here:
+        "
+        call minpac#add('tbabej/taskwiki', { 'type': 'opt' })
+        " call minpac#add('Rykka/riv.vim')
+        "call minpac#add('Rykka/InstantRst')
+        call minpac#add('kien/ctrlp.vim')
+        call minpac#add('davidhalter/jedi-vim')
+        call minpac#add('klen/python-mode')
+        call minpac#add('christoomey/vim-tmux-navigator')
+        "Bundle 'davidoc/taskpaper.vim')
+        "call minpac#add(in 'RST-Tables')
+        call minpac#add('Shutnik/jshint2.vim')
+        call minpac#add('kchmck/vim-coffee-script')
+        call minpac#add('vim-scripts/vimwiki')  " using RiV now
+        call minpac#add('chikamichi/mediawiki.vim', { 'type': 'opt' })
+        call minpac#add('mileszs/ack.vim')
+        call minpac#add('will133/vim-dirdiff')
+        call minpac#add('hrj/vim-DrawIt', { 'type': 'opt' })
+        call minpac#add('mattn/calendar-vim')
+        call minpac#add('scrooloose/nerdtree')
+        """call minpac#add('Valloric/YouCompleteMe', { 'do': function('BuildYCM') })
+        "call minpac#add('floobits/floobits-neovim')
+        call minpac#add('tpope/vim-sleuth')
+        call minpac#add('tpope/vim-surround')
+        call minpac#add('tpope/vim-unimpaired')
+        call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
+        call minpac#add('bling/vim-airline')
+        call minpac#add('airblade/vim-gitgutter')
+        call minpac#add('tpope/vim-fugitive')
+        " from https://github.com/jbranchaud/til/blob/master/vim/view-commit-history-of-a-file.md
+        call minpac#add('gregsexton/gitv')
+        call minpac#add('chase/vim-ansible-yaml')
+        call minpac#add('rhysd/committia.vim')
+        call minpac#add('elmcast/elm-vim')
+        call minpac#add('editorconfig/editorconfig-vim')
+        call minpac#add('kannokanno/previm')
 
-"
+    endif
+
+    " Define user commands for updating/cleaning the plugins.
+    " Each of them loads minpac, reloads .vimrc to register the
+    " information of plugins, then performs the task.
+    command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
+    command! PackClean packadd minpac | source $MYVIMRC | call minpac#clean()
+
 endif
 
 filetype plugin indent on
@@ -225,6 +236,12 @@ set shiftround  " < & > always work with multiples of sw
 " sign
 :iabbrev @@ --Hal Wine<cr>hwine@mozilla.com
 set fileformats="unix,dos"
+:if exists("*strftime")
+" insert date & time from https://www.ibm.com/developerworks/library/l-vim-script-1/index.html
+" done 2017-11-09 at 18:22
+:inoremap <silent> <C-D><C-D> <C-R>=strftime("%Y-%m-%d")<CR>
+:inoremap <silent> <C-T><C-T> <C-R>=strftime("%H:%M")<CR>
+endif
 
 set hidden
 " from :help DiffOrig (via
@@ -283,6 +300,21 @@ let g:previm_disable_default_css = 1
 " show header with timestamp
 let g:previm_show_header = 1
 
+" Setup for vimwikis
+" define just one wiki, use temporary wikis elsewhere
+let wiki_1 = {}
+let wiki_1.path = '~/vimwiki/'
+let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
+let g:vimwiki_list = [wiki_1]
+
+" use '.vwiki' for temp wikis, in markdown
+let g:vimwiki_ext2syntax = { '.vwiki': 'default' }
+
+
+" From tpope: https://sanctum.geek.nz/arabesque/vim-annoyances/
+nnoremap n nzz
+nnoremap } }zz
+
 " Ideas from ulfr
 " "Languages that use spaces, not tabs
 " autocmd FileType js     :setlocal sw=4 ts=4 sts=4 expandtab
@@ -299,4 +331,4 @@ let g:previm_show_header = 1
 " autocmd FileType go     call tagbar#autoopen(0)
 " autocmd FileType mediawiki  :setlocal sw=4 ts=4 sts=4 noexpandtab wrap linebreak textwidth=120
 " autocmd FileType markdown   :setlocal sw=4 ts=4 sts=4 wrap linebreak textwidth=80
-" vim: set ft=vim :
+" vim: set ft=vim sw=4 sts=4 et:
