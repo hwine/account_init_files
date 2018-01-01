@@ -8,6 +8,7 @@
 # My convention - one way or the other
 hwine_notes/
 notes_hwine/
+venv/
 # for Floobits.com
 .floo
 .flooignore

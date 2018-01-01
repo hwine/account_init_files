@@ -33,6 +33,7 @@ if isdirectory($HOME . "/.vim")
         "call minpac#add('Rykka/InstantRst')
         call minpac#add('kien/ctrlp.vim')
         call minpac#add('davidhalter/jedi-vim')
+        call minpac#add('ervandew/supertab')  " for use with jedi
         call minpac#add('klen/python-mode')
         call minpac#add('christoomey/vim-tmux-navigator')
         "Bundle 'davidoc/taskpaper.vim')
