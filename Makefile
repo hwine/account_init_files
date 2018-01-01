@@ -22,7 +22,9 @@ DOT_FILES= \
 	inputrc \
 	screenrc \
 	tmux.conf \
+	tmux.conf.Darwin \
 	vimrc \
+
 
 # other targets that install things similar to dotfiles
 MISC_TARGETS= \
@@ -101,13 +103,25 @@ EXPECTED_FILES = \
 	ack \
 
 dot_files: $(DOT_FILES)
-	@for f in $?; do \
+	@symlink() { echo "pushd $(HOME) &>/dev/null; ln -sf $$relpath/$$1 .$$1; popd &>/dev/null" ; } ; \
+	for f in $?; do \
+	    : relative path from home to here ; \
+	    relpath=$$(eval 'a=$$PWD; a=$${a#$$HOME/}; echo $$a') ; \
+	    : echo $$relpath ; \
 	    if test -h ~/.$$f ; then \
 		echo "#$$f is already symlinked"; \
+		: check if correct symlink ; \
+		link=$$(eval 'readlink ~/.$$f') ; \
+		: echo $$link ; \
+		if $$(eval 'test "$$link" = "$${link#$$relpath}"') ; then \
+		    echo "#WARNING: existing rogue symlink" ; \
+		    symlink $$f ; \
+		fi ; \
 	    elif test -f ~/.$$f ; then \
 		echo "#$$f exists already"; \
 	    else \
-		echo "ln -s $(PWD)/$$f" ~/.$$f; \
+	    : echo "pushd $(HOME) &>/dev/null; ln -s $$relpath/$$f .$$f; popd &>/dev/null"; \
+	        symlink $$f ; \
 	    fi; \
 	done 
 

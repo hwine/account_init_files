@@ -268,7 +268,7 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 " autocmd Filetype gitcommit spell textwidth=72
 
 "let &t_Co=256
-colorscheme default
+colorscheme desert
 
 " elm_format support
 let g:elm_format_autosave = 1
