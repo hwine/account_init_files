@@ -1,3 +1,4 @@
+echo "bash_profile \$HOME='$HOME', ~='$(ls -d ~)'" >>/tmp/new.log
 set -o vi
 
 export MOZ_USER=${MOZ_USER:-hwine}
@@ -71,17 +72,12 @@ complete -o default -F _pip_completion pip
 # pip bash completion end
 
 # pipenv & pew bash completion start
-source $(pew shell_config)
- #eval $(env _PIPENV_COMPLETE=source-bash pipenv)
-_pipenv_completion() {
-    local IFS=$'\t'
-    COMPREPLY=( $( env COMP_WORDS="${COMP_WORDS[*]}" \
-                   COMP_CWORD=$COMP_CWORD \
-                   _PIPENV_COMPLETE=complete-bash $1 ) )
-    return 0
-}
-
-complete -F _pipenv_completion -o default pipenv
+if $(which pew &>/dev/null) ; then
+    source $(pew shell_config)
+fi
+if $(which pipenv &>/dev/null); then
+    eval $(env _PIPENV_COMPLETE=source-bash pipenv)
+fi
 # pipenv & pew bash completion end
 
 # Misc local files

@@ -63,6 +63,7 @@ if isdirectory($HOME . "/.vim")
         call minpac#add('elmcast/elm-vim')
         call minpac#add('editorconfig/editorconfig-vim')
         call minpac#add('kannokanno/previm')
+        call minpac#add('editorconfig/editorconfig-vim')
 
     endif
 

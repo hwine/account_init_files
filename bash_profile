@@ -1,3 +1,4 @@
+echo "bash_profile \$HOME='$HOME', ~='$(ls -d ~)'" >>/tmp/new.log
 export HISTCONTROL=ignoreboth
 if test $SHLVL -le 4; then
     # 1 is first shell, 2 is first shell in screen, 4 is first shell in tmux

@@ -6,3 +6,4 @@ clear  # the tty
 if [[ $TMUX ]]; then
     tmux clear-history
 fi
+history -c
