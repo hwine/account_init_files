@@ -28,13 +28,12 @@ DOT_FILES= \
 
 # other targets that install things similar to dotfiles
 MISC_TARGETS= \
-	vim_pathogen \
-	vim_after \
+	# vim_pathogen \
+	# vim_after \
 
 
 # my scripts
 BIN_FILES = \
-	ack \
 	clean-docker-for-mac.sh \
 	git-diff-driver \
 	hg-url \
@@ -50,7 +49,11 @@ BIN_FILES = \
 	tp-due \
 	useAWS \
 	useAnaconda \
+	useDockerWindowsHost \
+	useMozAWS \
+	usePipenv \
 	vim-post-crash \
+	# ack \
 
 
 # normal install consists of both scripts and rc files
@@ -99,8 +102,8 @@ lesspipe.sh:
 
 # expected resources
 EXPECTED_FILES = \
-	lesspipe.sh \
-	ack \
+	# lesspipe.sh \
+	# ack \
 
 dot_files: $(DOT_FILES)
 	@symlink() { echo "pushd $(HOME) &>/dev/null; ln -sf $$relpath/$$1 .$$1; popd &>/dev/null" ; } ; \
@@ -138,6 +141,7 @@ bin_files: $(BIN_FILES)
 
 # toggle ability to install into ~/Library
 pydist:
+	@echo "No longer supported" ; false
 	@if test -h ~/.pydistutils.cfg ; then \
 	    unlink ~/.pydistutils.cfg ; \
 	    echo "local package install disabled" ; \

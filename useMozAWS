@@ -1,0 +1,86 @@
+#!/bin/bash
+function session {
+    local cache_file expiration duration kwargs mfa role profile session session_name token
+    if [ -n "$1" ]; then
+        role="$(aws --profile "$1" configure get role_arn)"
+        cache_file="$HOME/.aws/cli/cache/$1--$(echo "$role" | tr : _ | tr / -).json"
+        # if cache file exists, get expiration time in seconds
+        [ -f "$cache_file" ] && expiration="$(date -d "$(jq -r .Credentials.Expiration < "$cache_file")" +%s 2>/dev/null)"
+        # detect a previous session that won't expire in the next 10 minutes
+        # if [ (cache exists) and ((cache expiration) > (now + 600 seconds)) ]; then
+        # add trailing 0 to seconds in case the values are empty
+        if [ -f "$cache_file" -a "${expiration}0" -gt "$(($(date +%s) + 600))0" ]; then
+            # valid cached session found, using cache
+            session="$(cat "$cache_file")"
+        elif [ -n "$role" ]; then
+            # role found using, using assume-role
+            session_name="AWS-CLI-session-$(date +%s)"
+            duration="$(aws --profile "$1" configure get session_duration || echo "$((${2:-1}*3600))")" # default duration 1 hour, or second arg
+            if ! profile="$(aws --profile "$1" configure get source_profile)"; then
+                echo 'source_profile missing for assume-role' >&2
+                return 1
+            fi
+            kwargs=( --role-arn "$role" --role-session-name "$session_name" --profile "$profile" )
+            mfa="$(aws --profile "$1" configure get mfa_serial)"
+            if [ -n "$mfa" ]; then
+                # if an mfa is specified get an mfa token for the session
+                printf 'Enter MFA code: ' >&2
+                read -s token
+                echo >&2
+                # validate the mfa token
+                if echo "$token" | grep -Eqx '[0-9]{6}'; then
+                    kwargs=( "${kwargs[@]}" --serial-number "$mfa" --token-code "$token" )
+                else
+                    echo invalid token >&2
+                    return 1
+                fi
+            fi
+            # get session or return non-zero
+            session="$(aws sts assume-role --duration-seconds "$duration" "${kwargs[@]}")" || return $?
+            echo "$session" > "$cache_file"
+        else
+            # no session found, no role found, using get-session-token
+            duration="$(aws --profile "$1" configure get session_duration || echo "$((${2:-1}*3600))")" # default duration 1 hour, or second arg
+            mfa="$(aws --profile "$1" configure get mfa_serial)"
+            if [ -n "$mfa" ]; then
+                # if an mfa is specified get an mfa token for the session
+                printf 'Enter MFA code: ' >&2
+                read -s token
+                echo >&2
+                # validate the mfa token
+                if echo "$token" | grep -Eqx '[0-9]{6}'; then
+                    kwargs=( --serial-number "$mfa" --token-code "$token" )
+                else
+                    echo invalid token >&2
+                    return 1
+                fi
+            fi
+            # get session or return non-zero
+            session="$(aws --profile "$1" sts get-session-token --duration-seconds "$duration" "${kwargs[@]}")" || return $?
+            echo "$session" > "$cache_file"
+        fi
+        # turn session into env vars
+        export AWS_DEFAULT_REGION="$(aws --profile "$1" configure get region || echo us-east-1)"
+        export AWS_ACCESS_KEY_ID="$(echo "$session" | jq -r .Credentials.AccessKeyId)"
+        export AWS_SECRET_ACCESS_KEY="$(echo "$session" | jq -r .Credentials.SecretAccessKey)"
+        export AWS_SESSION_TOKEN="$(echo "$session" | jq -r .Credentials.SessionToken)"
+        # alternate name used by some ansible modules
+        export AWS_SECURITY_TOKEN="$AWS_SESSION_TOKEN"
+    else
+        unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_SECURITY_TOKEN AWS_DEFAULT_REGION
+    fi
+}
+ 
+function _session() {
+    local cur commands envs
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    COMPREPLY=()
+ 
+    envs=( $(sed -nE 's/\[profile (.*)]/\1/p' ~/.aws/config) )
+ 
+    if [ "$COMP_CWORD" == '1' ]; then
+        COMPREPLY=( $(compgen -W "${envs[*]}" -- "$cur") )
+    fi
+}
+ 
+complete -F _session session

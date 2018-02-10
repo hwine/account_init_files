@@ -1,0 +1,9 @@
+
+# pipenv & pew bash completion start
+if $(which pew &>/dev/null) ; then
+    source $(pew shell_config)
+fi
+if $(which pipenv &>/dev/null); then
+    eval "$(env _PIPENV_COMPLETE=source-bash pipenv)"
+fi
+# pipenv & pew bash completion end
