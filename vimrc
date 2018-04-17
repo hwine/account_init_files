@@ -47,6 +47,8 @@ if isdirectory($HOME . "/.vim")
         call minpac#add('hrj/vim-DrawIt', { 'type': 'opt' })
         call minpac#add('mattn/calendar-vim')
         call minpac#add('scrooloose/nerdtree')
+        call minpac#add('ajmwagar/vim-deus')    " colorscheme
+        call minpac#add('altercation/vim-colors-solarized')    " colorscheme
         """call minpac#add('Valloric/YouCompleteMe', { 'do': function('BuildYCM') })
         "call minpac#add('floobits/floobits-neovim')
         call minpac#add('tpope/vim-sleuth')
@@ -64,6 +66,7 @@ if isdirectory($HOME . "/.vim")
         call minpac#add('editorconfig/editorconfig-vim')
         call minpac#add('kannokanno/previm')
         call minpac#add('editorconfig/editorconfig-vim')
+        call minpac#add('embear/vim-foldsearch')
 
     endif
 
@@ -312,6 +315,37 @@ let g:vimwiki_list = [wiki_1]
 " use '.vwiki' for temp wikis, in markdown
 let g:vimwiki_ext2syntax = { '.vwiki': 'default' }
 
+" setup solarized per
+" https://github.com/altercation/vim-colors-solarized
+let g:solarized_termcolors=256
+set background=light
+colorscheme solarized
+"call togglebg#map("<f5>")
+
+" auto paste toggle start
+" from https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
+function! WrapForTmux(s)
+  if !exists('$TMUX')
+    return a:s
+  endif
+
+  let tmux_start = "\<Esc>Ptmux;"
+  let tmux_end = "\<Esc>\\"
+
+  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+endfunction
+
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+" auto paste toggle end
 
 " From tpope: https://sanctum.geek.nz/arabesque/vim-annoyances/
 nnoremap n nzz

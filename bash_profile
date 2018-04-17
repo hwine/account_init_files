@@ -1,5 +1,10 @@
 echo "bash_profile \$HOME='$HOME', ~='$(ls -d ~)'" >>/tmp/new.log
 export HISTCONTROL=ignoreboth
+umask 022
+export DISPLAY=:0
+if ! $(pgrep ssh-agent &>/dev/null); then
+    eval "$(ssh-agent)"
+fi
 if test $SHLVL -le 4; then
     # 1 is first shell, 2 is first shell in screen, 4 is first shell in tmux
     # be sure not to export
@@ -33,6 +38,11 @@ export GOPATH=$HOME/go
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
+# Misc local files (*.rc for bashrc time, *.sh for bash_profile time)
+for f in ~/.local/etc/profile.d/*.sh; do
+    source $f
+done
+
 # wait to do this until path is set
 #[ -r /etc/profile ] && . /etc/profile
 [ -r ~/.bashrc ] && . ~/.bashrc
@@ -41,8 +51,9 @@ if [ -r "/usr/local/opt/nvm/nvm.sh" -a -z "$NVM_DIR" ]; then
     . "/usr/local/opt/nvm/nvm.sh"
 fi
 
-# ensure all AWS usage is explict
-export AWS_DEFAULT_PROFILE=no_such_profile
-# FoxOps tooling
-## [[ -r ~/.mfa.sh ]] && source ~/.mfa.sh
-## export -f switch _switch
+# Misc local files (*.rc for bashrc time, *.sh for bash_profile time)
+for f in ~/.local/etc/profile.d/*.rc; do
+    source $f
+done
+
+export PATH="$HOME/.cargo/bin:$PATH"

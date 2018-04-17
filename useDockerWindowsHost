@@ -1,1 +1,11 @@
 export DOCKER_HOST="localhost:2375"
+
+# set up a variable with the path visble to docker of a wsl volume
+export ROOTFS=/c/Users/Hal\ Wine/AppData/Local/Packages/CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc/LocalState/rootfs
+
+if ! test -d /c/Users; then
+    echo "enter sudo password to bind mount /c"
+    sudo mount --bind /mnt/c /c
+fi
+
+echo "usage: docker run -v \"\$ROOTFS\"/\$PWD:/path/in/container"

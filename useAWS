@@ -2,3 +2,8 @@
 if type -p aws_completer &>/dev/null ; then
     complete -C "$(type -p aws_completer)" aws
 fi
+
+# load in CloudOps authentication scheme
+if [[ -x $HOME/repos/aws-assume-role/aws-assume-role ]]; then
+    source $HOME/repos/aws-assume-role/aws-assume-role
+fi

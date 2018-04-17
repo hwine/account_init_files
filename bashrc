@@ -137,7 +137,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-function tmux() { export TERM=screen-256color-bce ; command tmux "$@" ; }
+function tmux() { local c=ssh-agent ; pgrep $c &>/dev/null && c= ; command $c tmux "$@" ; }
 export -f tmux
 function jsonlint() { python -c "import json; json.load(open('$1'))"; }
 function lf(){ \ls -t | head -1 ;}
@@ -158,19 +158,6 @@ ssh-remove-host() {
 }
 
 [ -r ~/bin/rprompt ] && PROMPT_COMMAND='source ~/bin/rprompt'
-
-if $(which pyenv &>/dev/null); then
-    # switching to using `pew` as the accessor, for the pyenv managed
-    # versions DANGER DANGER
-    # Switch to use approach from
-    #   https://medium.com/@henriquebastos/the-definitive-guide-to-setup-my-python-workspace-628d68552e14
-    export WORKON_HOME=~/.virtualenvs
-    export PROJECT_HOME=~/repos
-    eval "$(pyenv init -)"
-    # pyenv virtualenvwrapper_lazy
-    export PYENV_VIRTUALENV_DISABLE_PROMPT=0
-fi
-
 
 if [ -r ~/tools/Mercurial/hgtab/hgtab-bash.sh ] ; then
     source ~/tools/Mercurial/hgtab/hgtab-bash.sh
@@ -194,7 +181,7 @@ complete -o default -F _pip_completion pip
 # pip bash completion end
 
 
-# Misc local files
-for f in ~/.local/etc/profile.d/*; do
+# Misc local files (*.rc for bashrc time, *.sh for bash_profile time)
+for f in ~/.local/etc/profile.d/*.rc; do
     source $f
 done

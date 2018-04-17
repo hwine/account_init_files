@@ -1,10 +1,11 @@
 [user]
         name = Hal Wine
         email = hwine@mozilla.com
+	signingkey = 5B58CECCB33FADF432D95BD1F6D0F761DCCCECA4
 [core]
         excludesfile = ~/.gitignore_global
         whitespace = trailing-space,space-before-tab,tab-in-indent
-	editor = nvim
+	editor = vim
 [difftool "sourcetree"]
         cmd = opendiff \"$LOCAL\" \"$REMOTE\"
         path = 
@@ -24,9 +25,9 @@
 [difftool "sourcetree"]
         cmd = opendiff \"$LOCAL\" \"$REMOTE\"
         path = 
-[mergetool "sourcetree"]
-        cmd = /Volumes/SourceTree/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-        trustExitCode = true
+#[mergetool "sourcetree"]
+        #cmd = /Volumes/SourceTree/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+        #trustExitCode = true
 [alias]
         graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
         glog = graph
@@ -48,4 +49,4 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 [credential]
-	helper = osxkeychain
+        # helper = osxkeychain
